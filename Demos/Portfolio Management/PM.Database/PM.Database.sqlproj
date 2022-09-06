@@ -95,6 +95,10 @@
     <Build Include="Tables\RoomType.sql" />
     <Build Include="Tables\RoomTypeCategory.sql" />
     <Build Include="Tables\WorldRegion.sql" />
+    <Build Include="Tables\CommunityAttributeType.sql" />
+    <Build Include="Tables\CommunityAttribute.sql" />
+    <Build Include="Tables\CommunityDigitalAsset.sql" />
+    <Build Include="Tables\CommunityCommunityAttribute.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\Populate\Populate_Country.sql" />
@@ -124,6 +128,13 @@
     <None Include="Scripts\CustomerData\CustomerData_RoomType.sql" />
     <None Include="Scripts\CustomerData\CustomerData_RoomTypeCategory.sql" />
     <None Include="Publish\Local.publish.xml" />
+    <None Include="Scripts\CustomerData\CustomerData_Content.sql" />
+    <None Include="Scripts\CustomerData\CustomerData_ContentCopy.sql" />
+    <None Include="Scripts\CustomerData\CustomerData_CommunityAttributeType.sql" />
+    <None Include="Scripts\CustomerData\CustomerData_DigitalAsset.sql" />
+    <None Include="Scripts\CustomerData\CustomerData_CommunityAttribute.sql" />
+    <None Include="Scripts\CustomerData\CustomerData_CommunityCommunityAttribute.sql" />
+    <None Include="Scripts\CustomerData\CustomerData_CommunityDigitalAsset.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />

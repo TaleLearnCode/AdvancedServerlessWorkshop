@@ -7,6 +7,9 @@
 :r .\Populate\Populate_DigitalAssetType.sql
 
 ------ Customer Data Population Scripts
+:r .\CustomerData\CustomerData_Content.sql
+:r .\CustomerData\CustomerData_ContentCopy.sql
+:r .\CustomerData\CustomerData_DigitalAsset.sql
 :r .\CustomerData\CustomerData_PayorType.sql
 :r .\CustomerData\CustomerData_CareType.sql
 :r .\CustomerData\CustomerData_RoomStyle.sql
@@ -26,3 +29,7 @@
 :r .\CustomerData\CustomerData_Room.sql
 :r .\CustomerData\CustomerData_RoomRate.sql
 :r .\CustomerData\CustomerData_RoomCareType.sql
+
+:r .\CustomerData\CustomerData_CommunityAttributeType.sql
+:r .\CustomerData\CustomerData_CommunityAttribute.sql
+:r .\CustomerData\CustomerData_CommunityCommunityAttribute.sql

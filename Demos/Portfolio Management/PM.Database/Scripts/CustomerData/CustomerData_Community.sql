@@ -2,15 +2,15 @@
 GO
 
 MERGE PM.Community AS TARGET
-USING (VALUES ( 1, '30100', 'Moon Over Nowhere', 'Northstar Moon Over Nowhere', 'en-US', 'sq ft', NULL, 'US', '-54.567', '49.2969', NULL, 2, 0, 1),
-              ( 2, '30101', 'Homeowners Realty', 'Northstar Homeowners Realty', 'en-US', 'sq ft', NULL, 'US', '-20.3845', '43.9132', NULL, 2, 0, 1),
-              ( 3, '30102', 'La Casa Grande', 'Northstar La Casa Grande', 'en-US', 'sq ft', NULL, 'US', '63.0826', '-130.8007', NULL, 2, 0, 1),
+USING (VALUES ( 1, '30100', 'Moon Over Nowhere', 'Northstar Moon Over Nowhere', 'en-US', 'sq ft', 555, 'US', '-54.567', '49.2969', 265, 2, 0, 1),
+              ( 2, '30101', 'Homeowners Realty', 'Northstar Homeowners Realty', 'en-US', 'sq ft', 556, 'US', '-20.3845', '43.9132', 266, 2, 0, 1),
+              ( 3, '30102', 'La Casa Grande', 'Northstar La Casa Grande', 'en-US', 'sq ft', 557, 'US', '63.0826', '-130.8007', 267, 2, 0, 1),
               ( 4, '30103', 'Fashion-I-Best', 'Northstar Fashion-I-Best', 'en-US', 'sq ft', NULL, 'US', '-67.6693', '-154.3146', NULL, 2, 0, 1),
               ( 5, '30104', 'Wise and in the Way', 'Northstar Wise and in the Way', 'en-US', 'sq ft', NULL, 'US', '22.492', '61.3031', NULL, 2, 0, 1),
-              ( 6, '30105', 'Tower of Hope', 'Northstar Tower of Hope', 'en-US', 'sq ft', NULL, 'US', '8.5465', '-125.1281', NULL, 2, 0, 1),
-              ( 7, '30106', 'Exuberanch', 'Northstar Exuberanch', 'en-US', 'sq ft', NULL, 'US', '-28.1082', '-67.4955', NULL, 2, 0, 1),
+              ( 6, '30105', 'Tower of Hope', 'Northstar Tower of Hope', 'en-US', 'sq ft', 558, 'US', '8.5465', '-125.1281', 268, 2, 0, 1),
+              ( 7, '30106', 'Exuberanch', 'Northstar Exuberanch', 'en-US', 'sq ft', 559, 'US', '-28.1082', '-67.4955', 269, 2, 0, 1),
               ( 8, '30107', 'The Enchanted Garden', 'Northstar The Enchanted Garden', 'en-US', 'sq ft', NULL, 'US', '-51.2392', '92.6853', NULL, 2, 0, 1),
-              ( 9, '30108', 'Stone Ranch', 'Northstar Stone Ranch', 'en-US', 'sq ft', NULL, 'US', '-58.9132', '-17.2829', NULL, 2, 0, 1),
+              ( 9, '30108', 'Stone Ranch', 'Northstar Stone Ranch', 'en-US', 'sq ft', 560, 'US', '-58.9132', '-17.2829', 270, 2, 0, 1),
               (10, '30109', 'Mild Manor', 'Northstar Mild Manor', 'en-US', 'sq ft', NULL, 'US', '30.8979', '81.2034', NULL, 2, 0, 1),
               (11, '30110', 'Jen & Barry’s', 'Northstar Jen & Barry’s', 'en-US', 'sq ft', NULL, 'US', '45.0338', '-172.4458', NULL, 2, 0, 1),
               (12, '30111', 'Rancho Pleasanton', 'Northstar Rancho Pleasanton', 'en-US', 'sq ft', NULL, 'US', '-11.1606', '104.0436', NULL, 2, 0, 1),
