@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>SLS.Marketing.ResponseBuilding</AssemblyName>
+    <RootNamespace>SLS.Marketing.ResponseBuilding</RootNamespace>
+    <Version>0.0.1-dev</Version>
+    <Authors>Senior Living Systems</Authors>
+    <Product>SLS Marketing API</Product>
+    <Description>Provides a set of services for building the Marketing API responses.</Description>
+    <Copyright>2022 Green Events &amp; Technology, LLC. All rights reserved.</Copyright>
+    <ProjectGuid>{209F47B3-CFA1-44B8-8008-B1585864D711}</ProjectGuid>
+  </PropertyGroup>
+
+</Project>

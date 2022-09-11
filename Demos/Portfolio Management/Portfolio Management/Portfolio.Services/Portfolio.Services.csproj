@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="MarketingResponseBuilding\" />
+    <ProjectReference Include="..\..\Marketing\Marketing.Entities\Marketing.Entities.csproj" />
   </ItemGroup>
 
 </Project>
