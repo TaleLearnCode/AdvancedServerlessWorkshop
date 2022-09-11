@@ -1,4 +1,4 @@
-﻿namespace SLS.Portfolio.Marketing.Responses;
+﻿namespace SLS.Marketing.Responses;
 
 /// <summary>
 /// Pricing information by care type response.

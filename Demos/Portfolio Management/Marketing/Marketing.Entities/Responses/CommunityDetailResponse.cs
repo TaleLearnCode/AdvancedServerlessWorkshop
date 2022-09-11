@@ -1,4 +1,4 @@
-﻿namespace SLS.Portfolio.Marketing.Responses;
+﻿namespace SLS.Marketing.Responses;
 
 public class CommunityDetailResponse
 {

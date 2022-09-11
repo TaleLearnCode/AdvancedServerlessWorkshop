@@ -1,24 +1,24 @@
-﻿namespace SLS.Portfolio.Marketing.Responses;
+﻿namespace SLS.Marketing.Responses;
 
 /// <summary>
 /// Represents a pricing response for the Marketing API.
 /// </summary>
-public interface IPricingByPayorTypeResponse
+public class PricingByPayorTypeResponse : IPricingByPayorTypeResponse
 {
 
 	/// <summary>
 	/// Name of the associated payor type for the pricing response.
 	/// </summary>
-	string PayorType { get; set; }
+	public string PayorType { get; set; } = null!;
 
 	/// <summary>
 	/// The starting value of the pricing range.
 	/// </summary>
-	int StartingAt { get; set; }
+	public int StartingAt { get; set; }
 
 	/// <summary>
 	/// The ending value of the pricing range.
 	/// </summary>
-	int EndingAt { get; set; }
+	public int EndingAt { get; set; }
 
 }

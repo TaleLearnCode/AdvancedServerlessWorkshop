@@ -1,4 +1,4 @@
-﻿namespace SLS.Portfolio.Marketing.Responses;
+﻿namespace SLS.Marketing.Responses;
 
 /// <summary>
 /// Represents pricing information for apartments of a particular room type.

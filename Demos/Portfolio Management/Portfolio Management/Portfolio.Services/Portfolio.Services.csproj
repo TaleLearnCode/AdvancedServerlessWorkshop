@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>SLS.Portfolio.Marketing</AssemblyName>
+    <RootNamespace>SLS.Portfolio.Marketing</RootNamespace>
+    <Version>0.0.1-dev</Version>
+    <Authors>Senior Living Systems</Authors>
+    <Product>SLS Portfolio Management</Product>
+    <Description>Provides a set of services used by the SLS Portfolio Management product.</Description>
+    <Copyright>2022 Green Events &amp; Technology, LLC. All rights reserved.</Copyright>
+    <ProjectGuid>{CE6FA61D-6331-4E99-B1EE-E3B07AF05454}</ProjectGuid>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="MarketingResponseBuilding\" />
+  </ItemGroup>
+
+</Project>

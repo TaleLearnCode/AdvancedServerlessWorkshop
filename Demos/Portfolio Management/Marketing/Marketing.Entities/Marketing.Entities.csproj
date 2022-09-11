@@ -4,12 +4,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyName>SLS.Portfolio.Marketing</AssemblyName>
-    <RootNamespace>SLS.Portfolio.Marketing</RootNamespace>
+    <AssemblyName>SLS.Marketing.Entities</AssemblyName>
+    <RootNamespace>SLS.Marketing</RootNamespace>
     <Version>0.0.1-dev</Version>
     <Authors>Senior Living Systems</Authors>
     <Product>SLS Marketing API</Product>
-    <Description>Provides a set of services used by the SLS Marketing API service.</Description>
+    <Description>Provides the entities used for the Marketing API.</Description>
     <Copyright>2022 Green Events &amp; Technology, LLC. All rights reserved.</Copyright>
     <ProjectGuid>{1C65C023-0B14-4F6E-B090-0CD3328797B4}</ProjectGuid>
   </PropertyGroup>
