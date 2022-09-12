@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents a postal address returned by the SLS Marketing API.
 /// </summary>
-public class PostalAddressResponse : IPostalAddressResponse
+public class PostalAddressResponse
 {
 
 	/// <summary>

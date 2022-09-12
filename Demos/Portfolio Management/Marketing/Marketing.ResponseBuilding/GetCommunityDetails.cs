@@ -17,7 +17,10 @@ public class GetCommunityDetails : ResponseBuildingBase, IGetCommunityDetails
 					await Build(community, roomGrouping, languageCulture);
 	}
 
-	private async Task<BuildCacheResponseDetail> Build(Community community, RoomGrouping roomGrouping, string languageCulture)
+	private async Task<BuildCacheResponseDetail> Build(
+		Community community,
+		RoomGrouping roomGrouping,
+		string languageCulture)
 	{
 		return await UpsertCosmosItemAsync(
 			CachedResponseDiscriminators.CommunityDetails,
@@ -30,7 +33,8 @@ public class GetCommunityDetails : ResponseBuildingBase, IGetCommunityDetails
 					PhoneNumber = await GetCommunityPhoneNumberAsync(community.CommunityId),
 					PostalAddress = await GetCommunityPostalAddressAsync(community.CommunityId),
 					StartingAtPrice = await GetCommunityStartingAtPriceAsync(community.CommunityId),
-					Pricing = await GetCommunityPricingAsync(community.CommunityId, roomGrouping)
+					Pricing = await GetCommunityPricingAsync(community.CommunityId, roomGrouping),
+					DigitalAssets = await GetDigitalAssetsAsync(community.CommunityId, languageCulture, community.LanguageCultureCode)
 				}
 			});
 	}
@@ -41,7 +45,7 @@ public class GetCommunityDetails : ResponseBuildingBase, IGetCommunityDetails
 			.FirstOrDefaultAsync(x => x.CommunityId == communityId && x.IsListingNumber))?.PhoneNumber;
 	}
 
-	private async Task<IPostalAddressResponse?> GetCommunityPostalAddressAsync(int communityId)
+	private async Task<PostalAddressResponse?> GetCommunityPostalAddressAsync(int communityId)
 	{
 
 		CommunityPostalAddress? communityPostalAddress = await _portfolioContext.CommunityPostalAddresses
@@ -86,7 +90,7 @@ public class GetCommunityDetails : ResponseBuildingBase, IGetCommunityDetails
 
 	}
 
-	private async Task<IDictionary<string, IPricingByCareTypeResponse>?> GetCommunityPricingAsync(int communityId, RoomGrouping roomGrouping)
+	private async Task<Dictionary<string, PricingByCareTypeResponse>?> GetCommunityPricingAsync(int communityId, RoomGrouping roomGrouping)
 	{
 
 		List<CommunityCareType> communityCareTypes = await _portfolioContext.CommunityCareTypes
@@ -95,7 +99,7 @@ public class GetCommunityDetails : ResponseBuildingBase, IGetCommunityDetails
 			.ToListAsync();
 		if (communityCareTypes.Any())
 		{
-			Dictionary<string, IPricingByCareTypeResponse> response = new();
+			Dictionary<string, PricingByCareTypeResponse> response = new();
 			foreach (CareType careType in communityCareTypes.Select(x => x.CareType))
 			{
 				string careTypeKey = careType.ExternalId ?? careType.CareTypeId.ToString();
@@ -103,7 +107,7 @@ public class GetCommunityDetails : ResponseBuildingBase, IGetCommunityDetails
 				{
 					CareTypeCode = careType.CareTypeCode,
 					CareTypeName = careType.CareTypeName,
-					RoomTypes = new Dictionary<string, IPricingByRoomTypeResponse>()
+					RoomTypes = new Dictionary<string, PricingByRoomTypeResponse>()
 				});
 				Dictionary<string, CareTypePricingResponses> careTypePricingResponses = new();
 				List<CommunityRoomType> communityRoomTypes = await _portfolioContext.CommunityRoomTypes
@@ -113,9 +117,9 @@ public class GetCommunityDetails : ResponseBuildingBase, IGetCommunityDetails
 				foreach (CommunityRoomType communityRoomType in communityRoomTypes)
 				{
 
-					(string Key, string Name) roomTypeKeyAndName = await GetRoomTypeKeyAndNameAsync(roomGrouping, communityRoomType.RoomTypeId);
-					IPricingByRoomTypeResponse availableResponse = InitializePricingByRoomTypeResponse(roomTypeKeyAndName.Name, communityRoomType.FloorPlan?.DigitalAssetUrl.ToUri());
-					IPricingByRoomTypeResponse unavailableResponse = InitializePricingByRoomTypeResponse(roomTypeKeyAndName.Name, communityRoomType.FloorPlan?.DigitalAssetUrl.ToUri());
+					(string Key, string Name) = await GetRoomTypeKeyAndNameAsync(roomGrouping, communityRoomType.RoomTypeId);
+					PricingByRoomTypeResponse availableResponse = InitializePricingByRoomTypeResponse(Name, communityRoomType.FloorPlan?.DigitalAssetUrl.ToUri());
+					PricingByRoomTypeResponse unavailableResponse = InitializePricingByRoomTypeResponse(Name, communityRoomType.FloorPlan?.DigitalAssetUrl.ToUri());
 
 					List<Room> rooms = await _portfolioContext.Rooms
 						.Include(x => x.RoomAvailability)
@@ -172,8 +176,8 @@ public class GetCommunityDetails : ResponseBuildingBase, IGetCommunityDetails
 						if (room.RoomAvailability.ShowAsAvailable) availableResponse.VacantCount++;
 					}
 
-					careTypePricingResponses.TryAdd(roomTypeKeyAndName.Key, new());
-					careTypePricingResponses[roomTypeKeyAndName.Key].AddResponses(availableResponse, unavailableResponse);
+					careTypePricingResponses.TryAdd(Key, new());
+					careTypePricingResponses[Key].AddResponses(availableResponse, unavailableResponse);
 
 				}
 
@@ -189,7 +193,7 @@ public class GetCommunityDetails : ResponseBuildingBase, IGetCommunityDetails
 		}
 	}
 
-	private int? GetDisplayedRoomRate(RoomRate? roomRate)
+	private static int? GetDisplayedRoomRate(RoomRate? roomRate)
 	{
 		if (roomRate is not null)
 		{
@@ -209,23 +213,19 @@ public class GetCommunityDetails : ResponseBuildingBase, IGetCommunityDetails
 			.FirstOrDefaultAsync(x => x.RoomTypeId == roomTypeId);
 		if (roomType is not null)
 		{
-			switch (roomGrouping)
+			return roomGrouping switch
 			{
-				case RoomGrouping.RoomTypeCategory:
-					return (roomType.RoomTypeCategory?.ExternalId ?? roomType.RoomTypeCategory?.RoomTypeCategoryId.ToString() ?? roomTypeId.ToString(),
-						roomType.RoomTypeCategory?.RoomTypeCategoryName ?? roomTypeId.ToString());
-				case RoomGrouping.RoomStyle:
-					return (roomType.RoomStyle.ExternalId ?? roomType.RoomStyle.RoomStyleId.ToString(),
-						roomType.RoomStyle.RoomStyleName);
-				default:
-					return (roomType.ExternalId ?? roomType.RoomTypeId.ToString(), roomType.RoomTypeName);
-			}
+				RoomGrouping.RoomTypeCategory => (roomType.RoomTypeCategory?.ExternalId ?? roomType.RoomTypeCategory?.RoomTypeCategoryId.ToString() ?? roomTypeId.ToString(),
+										roomType.RoomTypeCategory?.RoomTypeCategoryName ?? roomTypeId.ToString()),
+				RoomGrouping.RoomStyle => (roomType.RoomStyle.ExternalId ?? roomType.RoomStyle.RoomStyleId.ToString(),
+										roomType.RoomStyle.RoomStyleName),
+				_ => (roomType.ExternalId ?? roomType.RoomTypeId.ToString(), roomType.RoomTypeName),
+			};
 		}
 		else
 			return (roomTypeId.ToString(), roomTypeId.ToString());
 	}
-
-	private IPricingByRoomTypeResponse InitializePricingByRoomTypeResponse(string roomTypeName, Uri? floorPlanUrl)
+	private static PricingByRoomTypeResponse InitializePricingByRoomTypeResponse(string roomTypeName, Uri? floorPlanUrl)
 	{
 		return new PricingByRoomTypeResponse()
 		{
@@ -235,18 +235,73 @@ public class GetCommunityDetails : ResponseBuildingBase, IGetCommunityDetails
 			ShowPricing = true,
 			StartingAt = 0,
 			EndingAt = 0,
-			PricingByPayorType = new Dictionary<string, IPricingByPayorTypeResponse>()
+			PricingByPayorType = new Dictionary<string, PricingByPayorTypeResponse>()
 		};
 	}
 
-	private List<string> GetCommunityLanguageCultures()
+	private static List<string> GetCommunityLanguageCultures()
 	{
 		return new() { "en-US", string.Empty };
 	}
 
-	private List<RoomGrouping> GetRoomGroupings()
+	private static List<RoomGrouping> GetRoomGroupings()
 	{
 		return new() { RoomGrouping.RoomType, RoomGrouping.RoomTypeCategory, RoomGrouping.RoomStyle };
+	}
+
+	private async Task<Dictionary<string, List<DigitalAssetResponse>>?> GetDigitalAssetsAsync(
+		int communityId,
+		string languageCulture,
+		string? defaultLanguageCulture)
+	{
+		List<CommunityDigitalAsset>? communityDigitalAssets = await _portfolioContext.CommunityDigitalAssets
+			.Include(x => x.DigitalAsset)
+				.ThenInclude(x => x.DigitalAssetType)
+			.Where(x => x.CommunityId == communityId)
+			.ToListAsync();
+		if (communityDigitalAssets is not null)
+		{
+			Dictionary<string, List<DigitalAssetResponse>> response = new();
+			foreach (CommunityDigitalAsset communityDigitalAsset in communityDigitalAssets)
+			{
+				response.TryAdd(communityDigitalAsset.DigitalAsset.DigitalAssetType.Discriminator, new List<DigitalAssetResponse>());
+				response[communityDigitalAsset.DigitalAsset.DigitalAssetType.Discriminator].Add(new DigitalAssetResponse()
+				{
+					Discriminator = communityDigitalAsset.DigitalAsset.Discriminator,
+					Name = communityDigitalAsset.DigitalAsset.DigitalAssetName,
+					Caption = await GetContentCopyAsync(communityDigitalAsset.DigitalAsset.CaptionId, languageCulture, defaultLanguageCulture),
+					AltText = await GetContentCopyAsync(communityDigitalAsset.DigitalAsset.AltTextId, languageCulture, defaultLanguageCulture),
+					Url = communityDigitalAsset.DigitalAsset.DigitalAssetUrl.ToUri(),
+					ThumbnailUrl = communityDigitalAsset.DigitalAsset.ThumbnailUrl.ToUri(),
+					IsFeatured = communityDigitalAsset.IsFeatured
+				});
+			}
+			return response;
+		}
+		else
+			return default;
+	}
+
+	private async Task<string?> GetContentCopyAsync(
+		int? contentId,
+		string languageCulture,
+		string? defaultLanguageCulture)
+	{
+		if (contentId is not null)
+		{
+			Content? content = await _portfolioContext.Contents
+				.Include(x => x.ContentCopies)
+				.FirstOrDefaultAsync(x => x.ContentId == contentId);
+			if (content is not null && content.ContentCopies.Any())
+			{
+				return content.ContentCopies.FirstOrDefault(x => x.LanguageCultureCode == languageCulture)?.CopyText ??
+					content.ContentCopies.FirstOrDefault(x => x.LanguageCultureCode == defaultLanguageCulture)?.CopyText ??
+					content.ContentCopies.First().CopyText;
+			}
+			else
+				return default;
+		}
+		return default;
 	}
 
 }

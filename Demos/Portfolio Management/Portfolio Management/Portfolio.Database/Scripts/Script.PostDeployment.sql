@@ -33,3 +33,4 @@
 :r .\CustomerData\CustomerData_CommunityAttributeType.sql
 :r .\CustomerData\CustomerData_CommunityAttribute.sql
 :r .\CustomerData\CustomerData_CommunityCommunityAttribute.sql
+:r .\CustomerData\CustomerData_CommunityDigitalAsset.sql

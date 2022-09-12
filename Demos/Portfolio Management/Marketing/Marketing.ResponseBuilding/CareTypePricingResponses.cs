@@ -3,20 +3,20 @@
 internal class CareTypePricingResponses
 {
 
-	internal List<IPricingByRoomTypeResponse> AvailableResponses { get; set; } = new List<IPricingByRoomTypeResponse>();
+	internal List<PricingByRoomTypeResponse> AvailableResponses { get; set; } = new List<PricingByRoomTypeResponse>();
 
-	internal List<IPricingByRoomTypeResponse> UnavailableResponses { get; set; } = new List<IPricingByRoomTypeResponse>();
+	internal List<PricingByRoomTypeResponse> UnavailableResponses { get; set; } = new List<PricingByRoomTypeResponse>();
 
-	internal void AddResponses(IPricingByRoomTypeResponse availableResponse, IPricingByRoomTypeResponse unavailalbeResponse)
+	internal void AddResponses(PricingByRoomTypeResponse availableResponse, PricingByRoomTypeResponse unavailalbeResponse)
 	{
 		AvailableResponses.Add(availableResponse);
 		UnavailableResponses.Add(unavailalbeResponse);
 	}
 
-	internal IPricingByRoomTypeResponse MergeResponses()
+	internal PricingByRoomTypeResponse MergeResponses()
 	{
-		IPricingByRoomTypeResponse response = InitializePricingByRoomTypeResponse(AvailableResponses[0].RoomType, AvailableResponses[0].FloorPlanUrl);
-		foreach (IPricingByRoomTypeResponse roomTypeResponse in (AvailableResponses.FirstOrDefault(x => x.VacantCount > 0) is not null) ? AvailableResponses : UnavailableResponses)
+		PricingByRoomTypeResponse response = InitializePricingByRoomTypeResponse(AvailableResponses[0].RoomType, AvailableResponses[0].FloorPlanUrl);
+		foreach (PricingByRoomTypeResponse roomTypeResponse in (AvailableResponses.FirstOrDefault(x => x.VacantCount > 0) is not null) ? AvailableResponses : UnavailableResponses)
 		{
 			response.AreaRangeStart = (response.AreaRangeStart == 0 || roomTypeResponse.AreaRangeStart < response.AreaRangeStart) ? roomTypeResponse.AreaRangeStart : response.AreaRangeStart;
 			response.AreaRangeEnd = (roomTypeResponse.AreaRangeEnd > response.AreaRangeEnd) ? roomTypeResponse.AreaRangeEnd : response.AreaRangeEnd;
@@ -24,7 +24,7 @@ internal class CareTypePricingResponses
 			response.ShowPricing = (!roomTypeResponse.ShowPricing) ? roomTypeResponse.ShowPricing : response.ShowPricing;
 			response.StartingAt = (response.StartingAt == 0 || roomTypeResponse.StartingAt < response.StartingAt) ? roomTypeResponse.StartingAt : response.StartingAt;
 			response.EndingAt = (response.EndingAt == 0 || roomTypeResponse.EndingAt > response.EndingAt) ? roomTypeResponse.EndingAt : response.EndingAt;
-			foreach (KeyValuePair<string, IPricingByPayorTypeResponse> pricingByPayorType in roomTypeResponse.PricingByPayorType)
+			foreach (KeyValuePair<string, PricingByPayorTypeResponse> pricingByPayorType in roomTypeResponse.PricingByPayorType)
 			{
 				response.PricingByPayorType.TryAdd(pricingByPayorType.Key, new PricingByPayorTypeResponse()
 				{
@@ -44,7 +44,7 @@ internal class CareTypePricingResponses
 		return response;
 	}
 
-	internal static IPricingByRoomTypeResponse InitializePricingByRoomTypeResponse(string roomTypeName, Uri? floorPlanUrl)
+	internal static PricingByRoomTypeResponse InitializePricingByRoomTypeResponse(string roomTypeName, Uri? floorPlanUrl)
 	{
 		return new PricingByRoomTypeResponse()
 		{
@@ -54,7 +54,7 @@ internal class CareTypePricingResponses
 			ShowPricing = true,
 			StartingAt = 0,
 			EndingAt = 0,
-			PricingByPayorType = new Dictionary<string, IPricingByPayorTypeResponse>()
+			PricingByPayorType = new Dictionary<string, PricingByPayorTypeResponse>()
 		};
 	}
 

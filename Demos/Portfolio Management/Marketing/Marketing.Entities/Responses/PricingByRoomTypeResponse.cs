@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents pricing information for apartments of a particular room type.
 /// </summary>
-public class PricingByRoomTypeResponse : IPricingByRoomTypeResponse
+public class PricingByRoomTypeResponse
 {
 
 	/// <summary>
@@ -55,6 +55,6 @@ public class PricingByRoomTypeResponse : IPricingByRoomTypeResponse
 	/// <summary>
 	/// Detailed pricing by payor type for the room type.
 	/// </summary>
-	public IDictionary<string, IPricingByPayorTypeResponse> PricingByPayorType { get; set; } = null!;
+	public Dictionary<string, PricingByPayorTypeResponse> PricingByPayorType { get; set; } = null!;
 
 }

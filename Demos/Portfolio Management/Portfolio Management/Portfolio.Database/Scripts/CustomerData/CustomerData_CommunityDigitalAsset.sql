@@ -124,21 +124,15 @@ WHEN MATCHED THEN UPDATE SET TARGET.CommunityId    = SOURCE.CommunityId,
                              TARGET.DigitalAssetId = SOURCE.DigitalAssetId,
                              TARGET.IsFeatured     = SOURCE.IsFeatured
 WHEN NOT MATCHED THEN INSERT (CommunityDigitalAssetId,
-                              ExternalId,
-                              Discriminator,
-                              DigitalAssetTypeId,
-                              DigitalAssetUrl,
-                              DigitalAssetName,
-                              AltTextId,
-                              CaptionId)
+                              CommunityId,
+                              DigitalAssetId,
+                              SortOrder,
+                              IsFeatured)
                       VALUES (SOURCE.CommunityDigitalAssetId,
-                              SOURCE.ExternalId,
-                              SOURCE.Discriminator,
-                              SOURCE.DigitalAssetTypeId,
-                              SOURCE.DigitalAssetUrl,
-                              SOURCE.DigitalAssetName,
-                              SOURCE.AltTextId,
-                              SOURCE.CaptionId);
+                              SOURCE.CommunityId,
+                              SOURCE.DigitalAssetId,
+                              SOURCE.SortOrder,
+                              SOURCE.IsFeatured);
 
 SET IDENTITY_INSERT PM.CommunityDigitalAsset OFF
 GO

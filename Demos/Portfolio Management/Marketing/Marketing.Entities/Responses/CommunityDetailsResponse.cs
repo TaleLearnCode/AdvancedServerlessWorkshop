@@ -21,7 +21,7 @@ public class CommunityDetailsResponse
 	/// <summary>
 	/// The primary, publicly-listed postal address for the community.
 	/// </summary>
-	public IPostalAddressResponse? PostalAddress { get; set; }
+	public PostalAddressResponse? PostalAddress { get; set; }
 
 	/// <summary>
 	/// The starting price of available apartments at the community.
@@ -31,6 +31,11 @@ public class CommunityDetailsResponse
 	/// <summary>
 	/// Pricing for the community by care type, then room type, and then payor type.
 	/// </summary>
-	public IDictionary<string, IPricingByCareTypeResponse>? Pricing { get; set; } = null!;
+	public Dictionary<string, PricingByCareTypeResponse>? Pricing { get; set; } = null!;
+
+	/// <summary>
+	/// Listing of the community digital assets grouped by the digital asset type.
+	/// </summary>
+	public Dictionary<string, List<DigitalAssetResponse>>? DigitalAssets { get; set; }
 
 }

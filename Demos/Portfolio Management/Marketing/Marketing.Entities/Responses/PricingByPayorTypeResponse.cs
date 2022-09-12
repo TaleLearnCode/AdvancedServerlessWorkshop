@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents a pricing response for the Marketing API.
 /// </summary>
-public class PricingByPayorTypeResponse : IPricingByPayorTypeResponse
+public class PricingByPayorTypeResponse
 {
 
 	/// <summary>

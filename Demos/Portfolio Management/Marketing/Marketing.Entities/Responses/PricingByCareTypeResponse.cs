@@ -3,7 +3,7 @@
 /// <summary>
 /// Pricing information by care type response.
 /// </summary>
-public class PricingByCareTypeResponse : IPricingByCareTypeResponse
+public class PricingByCareTypeResponse
 {
 
 	/// <summary>
@@ -19,6 +19,6 @@ public class PricingByCareTypeResponse : IPricingByCareTypeResponse
 	/// <summary>
 	/// Pricing for the care type by room type.
 	/// </summary>
-	public IDictionary<string, IPricingByRoomTypeResponse> RoomTypes { get; set; } = null!;
+	public Dictionary<string, PricingByRoomTypeResponse> RoomTypes { get; set; } = null!;
 
 }
