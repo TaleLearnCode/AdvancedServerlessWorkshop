@@ -11,7 +11,7 @@
     <Product>SLS Marketing API</Product>
     <Description>Entity Framework Core repository for the Portfolio database.</Description>
     <Copyright>2022 Green Events &amp; Technology, LLC. All rights reserved.</Copyright>
-    <ProjectGuid>{1C65C023-0B14-4F6E-B090-0CD3328797B4}</ProjectGuid>
+    <ProjectGuid>{09DD5B3E-E7D5-4CA4-8A87-29118F68B156}</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>

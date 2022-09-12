@@ -14,4 +14,9 @@
     <ProjectGuid>{209F47B3-CFA1-44B8-8008-B1585864D711}</ProjectGuid>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Marketing\Marketing.API\Marketing.API.csproj" />
+    <ProjectReference Include="..\Portfolio.Repository\Portfolio.Repository.csproj" />
+  </ItemGroup>
+
 </Project>

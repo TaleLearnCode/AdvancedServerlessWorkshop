@@ -1,6 +1,6 @@
 ﻿namespace SLS.Marketing.Responses;
 
-public class CommunityDetailResponse
+public class CommunityDetailsResponse
 {
 
 	/// <summary>
@@ -31,6 +31,6 @@ public class CommunityDetailResponse
 	/// <summary>
 	/// Pricing for the community by care type, then room type, and then payor type.
 	/// </summary>
-	public IDictionary<string, IPricingByCareTypeResponse> Pricing { get; set; } = null!;
+	public IDictionary<string, IPricingByCareTypeResponse>? Pricing { get; set; } = null!;
 
 }

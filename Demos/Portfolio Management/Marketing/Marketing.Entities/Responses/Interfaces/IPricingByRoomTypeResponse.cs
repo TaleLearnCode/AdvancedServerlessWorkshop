@@ -18,6 +18,16 @@ public interface IPricingByRoomTypeResponse
 	string AreaRange { get; set; }
 
 	/// <summary>
+	/// The starting value of the range of unit area for apartments of the room type.
+	/// </summary>
+	int AreaRangeStart { get; set; }
+
+	/// <summary>
+	/// The ending value of the range of unit area for apartments of the room type.
+	/// </summary>
+	int AreaRangeEnd { get; set; }
+
+	/// <summary>
 	/// Number of currently vacant apartments.
 	/// </summary>
 	int VacantCount { get; set; }

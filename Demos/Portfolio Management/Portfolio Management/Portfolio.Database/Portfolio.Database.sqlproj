@@ -99,6 +99,7 @@
     <Build Include="Tables\CommunityAttribute.sql" />
     <Build Include="Tables\CommunityDigitalAsset.sql" />
     <Build Include="Tables\CommunityCommunityAttribute.sql" />
+    <Build Include="Tables\CommunityLangaugeCulture.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\Populate\Populate_Country.sql" />
@@ -135,6 +136,7 @@
     <None Include="Scripts\CustomerData\CustomerData_CommunityAttribute.sql" />
     <None Include="Scripts\CustomerData\CustomerData_CommunityCommunityAttribute.sql" />
     <None Include="Scripts\CustomerData\CustomerData_CommunityDigitalAsset.sql" />
+    <None Include="Scripts\CustomerData\CustomerData_CommunityLanguageCulture.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />

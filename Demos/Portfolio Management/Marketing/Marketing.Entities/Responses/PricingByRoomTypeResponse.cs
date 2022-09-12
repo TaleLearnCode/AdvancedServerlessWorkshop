@@ -18,6 +18,16 @@ public class PricingByRoomTypeResponse : IPricingByRoomTypeResponse
 	public string AreaRange { get; set; } = null!;
 
 	/// <summary>
+	/// The starting value of the range of unit area for apartments of the room type.
+	/// </summary>
+	public int AreaRangeStart { get; set; }
+
+	/// <summary>
+	/// The ending value of the range of unit area for apartments of the room type.
+	/// </summary>
+	public int AreaRangeEnd { get; set; }
+
+	/// <summary>
 	/// Number of currently vacant apartments.
 	/// </summary>
 	public int VacantCount { get; set; }
