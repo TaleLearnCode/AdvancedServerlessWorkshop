@@ -38,4 +38,9 @@ public class CommunityDetailsResponse
 	/// </summary>
 	public Dictionary<string, List<DigitalAssetResponse>>? DigitalAssets { get; set; }
 
+	/// <summary>
+	/// Listing of the attributes assigned to the community grouped by attribute type.
+	/// </summary>
+	public Dictionary<string, List<CommunityAttributeResponse>>? Attributes { get; set; }
+
 }

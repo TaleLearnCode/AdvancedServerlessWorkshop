@@ -8,7 +8,9 @@
   IconId                   INT               NULL,
   RowStatusId              INT           NOT NULL CONSTRAINT dfCommunityAttribute_RowStatus DEFAULT (1),
   CONSTRAINT pkcCommunityAttribute PRIMARY KEY CLUSTERED (CommunityAttributeId),
-  CONSTRAINT fkCommunityAttribute_CommunityAttributeType FOREIGN KEY (CommunityAttributeTypeId) REFERENCES PM.CommunityAttributeType (CommunityAttributeTypeId)
+  CONSTRAINT fkCommunityAttribute_CommunityAttributeType FOREIGN KEY (CommunityAttributeTypeId) REFERENCES PM.CommunityAttributeType (CommunityAttributeTypeId),
+  CONSTRAINT fkCommunityAttribute_Content                FOREIGN KEY (LabelId)                  REFERENCES PM.Content (ContentId),
+  CONSTRAINT fkCommunityAttribute_DigitalAsset           FOREIGN KEY (IconId)                   REFERENCES PM.DigitalAsset (DigitalAssetId)
 )
 GO
 

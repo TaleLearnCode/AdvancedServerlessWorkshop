@@ -34,6 +34,19 @@ internal static partial class CreateModel
 				.HasForeignKey(d => d.CommunityAttributeTypeId)
 				.OnDelete(DeleteBehavior.ClientSetNull)
 				.HasConstraintName("fkCommunityAttribute_CommunityAttributeType");
+
+			entity.HasOne(d => d.Icon)
+				.WithMany(p => p.CommunityAttributes)
+				.HasForeignKey(d => d.IconId)
+				.OnDelete(DeleteBehavior.ClientSetNull)
+				.HasConstraintName("fkCommunityAttribute_DigitalAsset");
+
+			entity.HasOne(d => d.Label)
+				.WithMany(p => p.CommunityAttributes)
+				.HasForeignKey(d => d.LabelId)
+				.OnDelete(DeleteBehavior.ClientSetNull)
+				.HasConstraintName("fkCommunityAttribute_Content");
+
 		});
 	}
 

@@ -34,7 +34,8 @@ public class GetCommunityDetails : ResponseBuildingBase, IGetCommunityDetails
 					PostalAddress = await GetCommunityPostalAddressAsync(community.CommunityId),
 					StartingAtPrice = await GetCommunityStartingAtPriceAsync(community.CommunityId),
 					Pricing = await GetCommunityPricingAsync(community.CommunityId, roomGrouping),
-					DigitalAssets = await GetDigitalAssetsAsync(community.CommunityId, languageCulture, community.LanguageCultureCode)
+					DigitalAssets = await GetDigitalAssetsAsync(community.CommunityId, languageCulture, community.LanguageCultureCode),
+					Attributes = await GetCommunityAttributesAsync(community.CommunityId, languageCulture, community.LanguageCultureCode)
 				}
 			});
 	}
@@ -302,6 +303,44 @@ public class GetCommunityDetails : ResponseBuildingBase, IGetCommunityDetails
 				return default;
 		}
 		return default;
+	}
+
+	private async Task<Dictionary<string, List<CommunityAttributeResponse>>?> GetCommunityAttributesAsync(
+		int communityId,
+		string languageCulture,
+		string? defaultLanguageCulture)
+	{
+		List<CommunityCommunityAttribute>? communityCommunityAttributes = await _portfolioContext.CommunityCommunityAttributes
+			.Include(x => x.CommunityAttribute)
+				.ThenInclude(x => x.CommunityAttributeType)
+			.Include(x => x.CommunityAttribute)
+				.ThenInclude(x => x.Icon)
+			.Include(x => x.CommunityAttribute)
+				.ThenInclude(x => x.Label)
+			.Where(x => x.CommunityId == communityId)
+			.ToListAsync();
+		if (communityCommunityAttributes.Any())
+		{
+			Dictionary<string, List<CommunityAttributeResponse>> response = new();
+			foreach (CommunityCommunityAttribute communityCommunityAttribute in communityCommunityAttributes)
+			{
+				string attributeTypeKey = communityCommunityAttribute.CommunityAttribute.CommunityAttributeType.ExternalId ?? communityCommunityAttribute.CommunityAttribute.CommunityAttributeTypeId.ToString();
+				response.TryAdd(attributeTypeKey, new List<CommunityAttributeResponse>());
+				string? label = await GetContentCopyAsync(communityCommunityAttribute.CommunityAttribute.LabelId, languageCulture, defaultLanguageCulture);
+				if (label is not null)
+				{
+					response[attributeTypeKey].Add(new()
+					{
+						Label = label,
+						IconUrl = communityCommunityAttribute.CommunityAttribute.Icon.DigitalAssetUrl.ToUri(),
+						AltText = await GetContentCopyAsync(communityCommunityAttribute.CommunityAttribute.Icon.AltTextId, languageCulture, defaultLanguageCulture)
+					});
+				}
+			}
+			return response;
+		}
+		else
+			return default;
 	}
 
 }
