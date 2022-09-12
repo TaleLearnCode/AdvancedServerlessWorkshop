@@ -15,8 +15,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Marketing\Marketing.API\Marketing.API.csproj" />
-    <ProjectReference Include="..\Portfolio.Repository\Portfolio.Repository.csproj" />
+    <ProjectReference Include="..\..\Portfolio Management\Portfolio.Repository\Portfolio.Repository.csproj" />
+    <ProjectReference Include="..\Marketing.API\Marketing.API.csproj" />
   </ItemGroup>
 
 </Project>
