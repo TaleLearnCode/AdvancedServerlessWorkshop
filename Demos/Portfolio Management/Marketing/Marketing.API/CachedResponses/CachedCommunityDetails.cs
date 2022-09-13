@@ -1,8 +1,4 @@
-﻿using SLS.Marketing.Requests;
-using SLS.Marketing.Responses;
-using System.Text;
-
-namespace SLS.Marketing.CachedResponses;
+﻿namespace SLS.Marketing.CachedResponses;
 
 public class CachedCommunityDetails : BaseCachedResponse
 {

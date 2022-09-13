@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace SLS.Marketing.CachedResponses;
+﻿namespace SLS.Marketing.CachedResponses;
 
 public abstract class BaseCachedResponse
 {
