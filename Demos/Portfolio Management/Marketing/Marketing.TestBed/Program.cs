@@ -16,13 +16,15 @@ if (cosmosConnectionString is not null)
 	Database cosmosDatabase = await cosmosClient.CreateDatabaseIfNotExistsAsync("ASW");
 	Container container = await cosmosDatabase.CreateContainerIfNotExistsAsync("Northstar", "/Discriminator");
 
-	IGetCommunityDetails getCommunityDetails = new GetCommunityDetails(portfolioContext, container);
+	ICacheCommunityDetailsResponse getCommunityDetails = new CacheCommunityDetailsResponse(portfolioContext, container);
+	ICacheCommunityDigitalAssetsResponse getCommunityDigitalAssets = new CacheCommunityDigitalAssetsResponse(portfolioContext, container);
 
 	List<Community>? communities = await portfolioContext.Communities.ToListAsync();
 	using ProgressBar progressBar = new(communities.Count, $"Building responses (1 of {communities.Count})");
 	foreach (Community community in communities)
 	{
 		await getCommunityDetails.BuildAsync(community.CommunityNumber);
+		await getCommunityDigitalAssets.BuildAsync(community.CommunityNumber);
 		progressBar.Tick($"Building responses ({progressBar.CurrentTick + 1} of {progressBar.MaxTicks})");
 	}
 

@@ -5,12 +5,15 @@ public abstract class BaseCachedResponse
 
 	protected BaseCachedResponse(
 		string discriminator,
+		int rowStatusId,
 		string? objectId = null,
-		string? option = null,
-		string? languageCultureId = null)
+		string? languageCulture = null,
+		string? option = null)
 	{
 		Discriminator = discriminator;
-		Id = GenerateId(discriminator, objectId, option);
+		RowStatusId = rowStatusId;
+		LanguageCulture = languageCulture;
+		Id = GenerateId(discriminator, objectId, option, languageCulture);
 	}
 
 	/// <summary>
@@ -24,14 +27,20 @@ public abstract class BaseCachedResponse
 	/// </summary>
 	public string Discriminator { get; set; }
 
+	public int RowStatusId { get; set; }
+
+	public string? LanguageCulture { get; set; }
+
 	private static string GenerateId(
 		string discriminator,
 		string? objectId = null,
-		string? option = null)
+		string? option = null,
+		string? languageCulture = null)
 	{
 		StringBuilder response = new(discriminator);
 		if (!string.IsNullOrWhiteSpace(objectId)) response.Append($"_{objectId}");
-		if (!string.IsNullOrWhiteSpace(objectId)) response.Append($"_{option}");
+		if (!string.IsNullOrWhiteSpace(option)) response.Append($"_{option}");
+		if (!string.IsNullOrWhiteSpace(languageCulture)) response.Append($"_{languageCulture}");
 		return response.ToString();
 	}
 

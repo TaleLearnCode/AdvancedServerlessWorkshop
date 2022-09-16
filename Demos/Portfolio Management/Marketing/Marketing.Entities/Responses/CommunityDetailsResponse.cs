@@ -1,5 +1,8 @@
 ﻿namespace SLS.Marketing.Responses;
 
+/// <summary>
+/// Represents the response for the GetCommunityDetails endpoint.
+/// </summary>
 public class CommunityDetailsResponse
 {
 

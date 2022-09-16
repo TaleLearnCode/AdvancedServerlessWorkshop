@@ -1,6 +1,6 @@
 ﻿namespace SLS.Marketing.ResponseBuilding
 {
-	public interface IGetCommunityDetails
+	public interface ICacheCommunityDetailsResponse
 	{
 		Task BuildAsync(string communityNumber);
 	}

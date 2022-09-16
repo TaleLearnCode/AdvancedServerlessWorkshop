@@ -17,6 +17,7 @@ var host = new HostBuilder()
 	{
 		s.AddSingleton((s) => { return jsonSerializerOptions; });
 		s.AddSingleton<ICommunityDetailsServices>((s) => { return new CommunityDetailsServices(cosmosContainer); });
+		s.AddSingleton<ICommunityDigitalAssetsServices>((s) => { return new CommunityDigitalAssetsServices(cosmosContainer); });
 	})
 	.Build();
 

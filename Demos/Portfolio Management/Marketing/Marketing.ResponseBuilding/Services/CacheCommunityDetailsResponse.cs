@@ -1,9 +1,9 @@
 ﻿namespace SLS.Marketing.ResponseBuilding;
 
-public class GetCommunityDetails : ResponseBuildingBase, IGetCommunityDetails
+public class CacheCommunityDetailsResponse : CacheResponseBase, ICacheCommunityDetailsResponse
 {
 
-	public GetCommunityDetails(
+	public CacheCommunityDetailsResponse(
 		PortfolioContext portfolioContext,
 		Container cosmosContainer) : base(portfolioContext, cosmosContainer) { }
 
@@ -14,10 +14,10 @@ public class GetCommunityDetails : ResponseBuildingBase, IGetCommunityDetails
 		if (community is not null)
 			foreach (string languageCulture in GetCommunityLanguageCultures())
 				foreach (RoomGrouping roomGrouping in GetRoomGroupings())
-					await Build(community, roomGrouping, languageCulture);
+					await BuildAsync(community, roomGrouping, languageCulture);
 	}
 
-	private async Task<BuildCacheResponseDetail> Build(
+	private async Task<CacheResponseResult> BuildAsync(
 		Community community,
 		RoomGrouping roomGrouping,
 		string languageCulture)
@@ -82,12 +82,12 @@ public class GetCommunityDetails : ResponseBuildingBase, IGetCommunityDetails
 			int? displayedRate = GetDisplayedRoomRate(room.RoomRates.FirstOrDefault(x => x.PayorType.IsDefault));
 			if (displayedRate is not null && displayedRate > 0)
 				if (room.RoomAvailability.ShowAsAvailable)
-					availableStartingAtPrice = (availableStartingAtPrice == 0 || displayedRate < availableStartingAtPrice) ? (int)displayedRate : availableStartingAtPrice;
+					availableStartingAtPrice = availableStartingAtPrice == 0 || displayedRate < availableStartingAtPrice ? (int)displayedRate : availableStartingAtPrice;
 				else
-					unavailableStartingAtPrice = (unavailableStartingAtPrice == 0 || displayedRate < unavailableStartingAtPrice) ? (int)displayedRate : unavailableStartingAtPrice;
+					unavailableStartingAtPrice = unavailableStartingAtPrice == 0 || displayedRate < unavailableStartingAtPrice ? (int)displayedRate : unavailableStartingAtPrice;
 		}
 
-		return (availableStartingAtPrice > 0) ? availableStartingAtPrice : unavailableStartingAtPrice;
+		return availableStartingAtPrice > 0 ? availableStartingAtPrice : unavailableStartingAtPrice;
 
 	}
 
@@ -133,19 +133,19 @@ public class GetCommunityDetails : ResponseBuildingBase, IGetCommunityDetails
 
 						if (room.RoomArea is not null)
 						{
-							unavailableResponse.AreaRangeStart = (unavailableResponse.AreaRangeStart == 0 || room.RoomArea > unavailableResponse.AreaRangeStart) ? (int)room.RoomArea : unavailableResponse.AreaRangeStart;
-							unavailableResponse.AreaRangeEnd = (room.RoomArea > unavailableResponse.AreaRangeEnd) ? (int)room.RoomArea : unavailableResponse.AreaRangeEnd;
-							availableResponse.AreaRangeStart = (availableResponse.AreaRangeStart == 0 || room.RoomArea > availableResponse.AreaRangeStart) ? (int)room.RoomArea : availableResponse.AreaRangeStart;
-							availableResponse.AreaRangeEnd = (room.RoomArea > availableResponse.AreaRangeEnd) ? (int)room.RoomArea : availableResponse.AreaRangeEnd;
+							unavailableResponse.AreaRangeStart = unavailableResponse.AreaRangeStart == 0 || room.RoomArea > unavailableResponse.AreaRangeStart ? (int)room.RoomArea : unavailableResponse.AreaRangeStart;
+							unavailableResponse.AreaRangeEnd = room.RoomArea > unavailableResponse.AreaRangeEnd ? (int)room.RoomArea : unavailableResponse.AreaRangeEnd;
+							availableResponse.AreaRangeStart = availableResponse.AreaRangeStart == 0 || room.RoomArea > availableResponse.AreaRangeStart ? (int)room.RoomArea : availableResponse.AreaRangeStart;
+							availableResponse.AreaRangeEnd = room.RoomArea > availableResponse.AreaRangeEnd ? (int)room.RoomArea : availableResponse.AreaRangeEnd;
 						}
 
 						int? displayedRate = GetDisplayedRoomRate(room.RoomRates.FirstOrDefault(x => x.PayorType.IsDefault));
 						if (displayedRate is not null)
 						{
-							unavailableResponse.StartingAt = (unavailableResponse.StartingAt == 0 || displayedRate < unavailableResponse.StartingAt) ? (int)displayedRate : unavailableResponse.StartingAt;
-							unavailableResponse.EndingAt = (displayedRate > unavailableResponse.EndingAt) ? (int)displayedRate : unavailableResponse.EndingAt;
-							availableResponse.StartingAt = (availableResponse.StartingAt == 0 || displayedRate < availableResponse.StartingAt) ? (int)displayedRate : availableResponse.StartingAt;
-							availableResponse.EndingAt = (displayedRate > availableResponse.EndingAt) ? (int)displayedRate : availableResponse.EndingAt;
+							unavailableResponse.StartingAt = unavailableResponse.StartingAt == 0 || displayedRate < unavailableResponse.StartingAt ? (int)displayedRate : unavailableResponse.StartingAt;
+							unavailableResponse.EndingAt = displayedRate > unavailableResponse.EndingAt ? (int)displayedRate : unavailableResponse.EndingAt;
+							availableResponse.StartingAt = availableResponse.StartingAt == 0 || displayedRate < availableResponse.StartingAt ? (int)displayedRate : availableResponse.StartingAt;
+							availableResponse.EndingAt = displayedRate > availableResponse.EndingAt ? (int)displayedRate : availableResponse.EndingAt;
 						}
 
 						foreach (RoomRate roomRate in room.RoomRates)
@@ -160,8 +160,8 @@ public class GetCommunityDetails : ResponseBuildingBase, IGetCommunityDetails
 								StartingAt = 0,
 								EndingAt = 0
 							});
-							unavailableResponse.PricingByPayorType[payorTypeKey].StartingAt = (unavailableResponse.PricingByPayorType[payorTypeKey].StartingAt == 0 || displayedRate < unavailableResponse.PricingByPayorType[payorTypeKey].StartingAt) ? (int)displayedRate : unavailableResponse.PricingByPayorType[payorTypeKey].StartingAt;
-							unavailableResponse.PricingByPayorType[payorTypeKey].EndingAt = (displayedRate > unavailableResponse.PricingByPayorType[payorTypeKey].StartingAt) ? (int)displayedRate : unavailableResponse.PricingByPayorType[payorTypeKey].EndingAt;
+							unavailableResponse.PricingByPayorType[payorTypeKey].StartingAt = unavailableResponse.PricingByPayorType[payorTypeKey].StartingAt == 0 || displayedRate < unavailableResponse.PricingByPayorType[payorTypeKey].StartingAt ? (int)displayedRate : unavailableResponse.PricingByPayorType[payorTypeKey].StartingAt;
+							unavailableResponse.PricingByPayorType[payorTypeKey].EndingAt = displayedRate > unavailableResponse.PricingByPayorType[payorTypeKey].StartingAt ? (int)displayedRate : unavailableResponse.PricingByPayorType[payorTypeKey].EndingAt;
 
 							availableResponse.PricingByPayorType.TryAdd(payorTypeKey, new PricingByPayorTypeResponse()
 							{
@@ -169,8 +169,8 @@ public class GetCommunityDetails : ResponseBuildingBase, IGetCommunityDetails
 								StartingAt = 0,
 								EndingAt = 0
 							});
-							availableResponse.PricingByPayorType[payorTypeKey].StartingAt = (availableResponse.PricingByPayorType[payorTypeKey].StartingAt == 0 || displayedRate < availableResponse.PricingByPayorType[payorTypeKey].StartingAt) ? (int)displayedRate : availableResponse.PricingByPayorType[payorTypeKey].StartingAt;
-							availableResponse.PricingByPayorType[payorTypeKey].EndingAt = (displayedRate > availableResponse.PricingByPayorType[payorTypeKey].StartingAt) ? (int)displayedRate : availableResponse.PricingByPayorType[payorTypeKey].EndingAt;
+							availableResponse.PricingByPayorType[payorTypeKey].StartingAt = availableResponse.PricingByPayorType[payorTypeKey].StartingAt == 0 || displayedRate < availableResponse.PricingByPayorType[payorTypeKey].StartingAt ? (int)displayedRate : availableResponse.PricingByPayorType[payorTypeKey].StartingAt;
+							availableResponse.PricingByPayorType[payorTypeKey].EndingAt = displayedRate > availableResponse.PricingByPayorType[payorTypeKey].StartingAt ? (int)displayedRate : availableResponse.PricingByPayorType[payorTypeKey].EndingAt;
 
 						}
 
@@ -240,69 +240,9 @@ public class GetCommunityDetails : ResponseBuildingBase, IGetCommunityDetails
 		};
 	}
 
-	private static List<string> GetCommunityLanguageCultures()
-	{
-		return new() { "en-US", string.Empty };
-	}
-
 	private static List<RoomGrouping> GetRoomGroupings()
 	{
 		return new() { RoomGrouping.RoomType, RoomGrouping.RoomTypeCategory, RoomGrouping.RoomStyle };
-	}
-
-	private async Task<Dictionary<string, List<DigitalAssetResponse>>?> GetDigitalAssetsAsync(
-		int communityId,
-		string languageCulture,
-		string? defaultLanguageCulture)
-	{
-		List<CommunityDigitalAsset>? communityDigitalAssets = await _portfolioContext.CommunityDigitalAssets
-			.Include(x => x.DigitalAsset)
-				.ThenInclude(x => x.DigitalAssetType)
-			.Where(x => x.CommunityId == communityId)
-			.ToListAsync();
-		if (communityDigitalAssets is not null)
-		{
-			Dictionary<string, List<DigitalAssetResponse>> response = new();
-			foreach (CommunityDigitalAsset communityDigitalAsset in communityDigitalAssets)
-			{
-				response.TryAdd(communityDigitalAsset.DigitalAsset.DigitalAssetType.Discriminator, new List<DigitalAssetResponse>());
-				response[communityDigitalAsset.DigitalAsset.DigitalAssetType.Discriminator].Add(new DigitalAssetResponse()
-				{
-					Discriminator = communityDigitalAsset.DigitalAsset.Discriminator,
-					Name = communityDigitalAsset.DigitalAsset.DigitalAssetName,
-					Caption = await GetContentCopyAsync(communityDigitalAsset.DigitalAsset.CaptionId, languageCulture, defaultLanguageCulture),
-					AltText = await GetContentCopyAsync(communityDigitalAsset.DigitalAsset.AltTextId, languageCulture, defaultLanguageCulture),
-					Url = communityDigitalAsset.DigitalAsset.DigitalAssetUrl.ToUri(),
-					ThumbnailUrl = communityDigitalAsset.DigitalAsset.ThumbnailUrl.ToUri(),
-					IsFeatured = communityDigitalAsset.IsFeatured
-				});
-			}
-			return response;
-		}
-		else
-			return default;
-	}
-
-	private async Task<string?> GetContentCopyAsync(
-		int? contentId,
-		string languageCulture,
-		string? defaultLanguageCulture)
-	{
-		if (contentId is not null)
-		{
-			Content? content = await _portfolioContext.Contents
-				.Include(x => x.ContentCopies)
-				.FirstOrDefaultAsync(x => x.ContentId == contentId);
-			if (content is not null && content.ContentCopies.Any())
-			{
-				return content.ContentCopies.FirstOrDefault(x => x.LanguageCultureCode == languageCulture)?.CopyText ??
-					content.ContentCopies.FirstOrDefault(x => x.LanguageCultureCode == defaultLanguageCulture)?.CopyText ??
-					content.ContentCopies.First().CopyText;
-			}
-			else
-				return default;
-		}
-		return default;
 	}
 
 	private async Task<Dictionary<string, List<CommunityAttributeResponse>>?> GetCommunityAttributesAsync(
