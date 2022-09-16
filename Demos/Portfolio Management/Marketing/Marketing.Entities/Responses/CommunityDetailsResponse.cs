@@ -29,7 +29,7 @@ public class CommunityDetailsResponse
 	/// <summary>
 	/// The starting price of available apartments at the community.
 	/// </summary>
-	public decimal StartingAtPrice { get; set; }
+	public int StartingAtPrice { get; set; }
 
 	/// <summary>
 	/// Pricing for the community by care type, then room type, and then payor type.
