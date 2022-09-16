@@ -1,16 +1,10 @@
 ﻿namespace SLS.Marketing.Requests;
 
 /// <summary>
-/// Options for filtering the GetCommunityDetails endpoint.
+/// Options for filtering the GetCommunityAttributes endpoint. 
 /// </summary>
-public class GetCommunityDetailsOptions
+public class GetCommunityAttributesOptions
 {
-
-	/// <summary>
-	/// The room grouping to use for displaying room availability and pricing.
-	/// The default value is <see cref="RoomGrouping.RoomStyle"/>.
-	/// </summary>
-	public RoomGrouping RoomGrouping { get; set; } = RoomGrouping.RoomStyle;
 
 	/// <summary>
 	/// The language/culture to use for returning the text values.
