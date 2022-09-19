@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{54AD73
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLS.Azure.Functions", "Common\SLS.Azure.Functions\SLS.Azure.Functions.csproj", "{BA9BAE54-6E5B-401D-B80E-DE303FCAFB59}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketing.ResponseBuilding.Functions", "Marketing\Marketing.ResponseBuilding.Functions\Marketing.ResponseBuilding.Functions.csproj", "{931BFFD4-85C6-41AE-B80A-E4DE464B8371}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{BA9BAE54-6E5B-401D-B80E-DE303FCAFB59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA9BAE54-6E5B-401D-B80E-DE303FCAFB59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA9BAE54-6E5B-401D-B80E-DE303FCAFB59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{931BFFD4-85C6-41AE-B80A-E4DE464B8371}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{931BFFD4-85C6-41AE-B80A-E4DE464B8371}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{931BFFD4-85C6-41AE-B80A-E4DE464B8371}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{931BFFD4-85C6-41AE-B80A-E4DE464B8371}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +91,7 @@ Global
 		{9DD6CA5A-31B0-4C4D-A23C-FD5B769A61F3} = {55CDC4F1-5A2C-4B62-AABD-50E34D255A83}
 		{2C705771-E4FC-4DB8-AFAF-4326373A5DC2} = {55CDC4F1-5A2C-4B62-AABD-50E34D255A83}
 		{BA9BAE54-6E5B-401D-B80E-DE303FCAFB59} = {54AD7328-787E-4F74-8EDF-F6DE36DC65D0}
+		{931BFFD4-85C6-41AE-B80A-E4DE464B8371} = {55CDC4F1-5A2C-4B62-AABD-50E34D255A83}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {17CB0C3B-E354-48CC-A983-7AC671662C59}
