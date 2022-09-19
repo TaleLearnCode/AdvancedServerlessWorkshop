@@ -25,4 +25,17 @@ public abstract class ServicesBase
 		return response;
 	}
 
+	protected async Task<List<T>> ExecuteCosmosQueryAsync<T>(string query)
+	{
+		List<T> response = new();
+		using FeedIterator<T> feedIterator = _cosmosContainer.GetItemQueryIterator<T>(query);
+		while (feedIterator.HasMoreResults)
+		{
+			FeedResponse<T> feedResponse = await feedIterator.ReadNextAsync();
+			foreach (T item in feedResponse)
+				response.Add(item);
+		}
+		return response;
+	}
+
 }

@@ -28,4 +28,14 @@ public class GetCommunityListingOptions
 	/// </summary>
 	public bool IncludeDeactivedCommunities { get; set; } = false;
 
+	/// <summary>
+	/// The size of the page of results to be returned.
+	/// </summary>
+	public int PageSize { get; set; } = 0;
+
+	/// <summary>
+	/// The number of communities to be returned on each page of results.
+	/// </summary>
+	public int PageNumber { get; set; } = 1;
+
 }

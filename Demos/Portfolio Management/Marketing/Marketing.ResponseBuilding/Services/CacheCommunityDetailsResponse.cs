@@ -39,29 +39,4 @@ public class CacheCommunityDetailsResponse : CacheResponseBase, ICacheCommunityD
 			});
 	}
 
-	private async Task<string?> GetCommunityPhoneNumberAsync(int communityId)
-	{
-		return (await _portfolioContext.CommunityPhoneNumbers
-			.FirstOrDefaultAsync(x => x.CommunityId == communityId && x.IsListingNumber))?.PhoneNumber;
-	}
-
-	private async Task<PostalAddressResponse?> GetCommunityPostalAddressAsync(int communityId)
-	{
-
-		CommunityPostalAddress? communityPostalAddress = await _portfolioContext.CommunityPostalAddresses
-			.FirstOrDefaultAsync(x => x.CommunityId == communityId && x.IsListingAddress);
-		if (communityPostalAddress is not null)
-			return new PostalAddressResponse()
-			{
-				StreetAddress1 = communityPostalAddress.StreetAddress1,
-				StreetAddress2 = communityPostalAddress.StreetAddress2,
-				City = communityPostalAddress.City,
-				CountryDivision = communityPostalAddress.CountryDivisionCode,
-				Country = communityPostalAddress.CountryCode,
-				PostalCode = communityPostalAddress.PostalCode
-			};
-		else
-			return default;
-	}
-
 }

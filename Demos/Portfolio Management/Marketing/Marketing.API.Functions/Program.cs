@@ -20,6 +20,7 @@ var host = new HostBuilder()
 		s.AddSingleton<ICommunityDigitalAssetsServices>((s) => { return new CommunityDigitalAssetsServices(cosmosContainer); });
 		s.AddSingleton<ICommunityPricingServices>((s) => { return new CommunityPricingServices(cosmosContainer); });
 		s.AddSingleton<ICommunityAttributesServices>((s) => { return new CommunityAttributesServices(cosmosContainer); });
+		s.AddSingleton<ICommunityListingServices>((s) => { return new CommunityListingServices(cosmosContainer); });
 	})
 	.Build();
 

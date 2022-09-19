@@ -187,4 +187,7 @@ public static class HttpRequestDataExtensions
 			return defaultValue;
 	}
 
+	public static int GetIntegerQueryStringValue(this HttpRequestData httpRequestData, string key, int defaultValue)
+		=> int.TryParse(httpRequestData.GetQueryStringValue(key), out int result) ? result : defaultValue;
+
 }

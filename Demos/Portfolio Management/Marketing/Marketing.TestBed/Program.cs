@@ -20,6 +20,7 @@ if (cosmosConnectionString is not null)
 	ICacheCommunityDigitalAssetsResponse getCommunityDigitalAssets = new CacheCommunityDigitalAssetsResponse(portfolioContext, container);
 	ICacheCommunityPricingResponse getCommunityPricing = new CacheCommunityPricingResponse(portfolioContext, container);
 	ICacheCommunityAttributesResponse getCommunityAttributes = new CacheCommunityAttributesResponse(portfolioContext, container);
+	ICacheCommunityListingResponse getCommunityListing = new CacheCommunityListingResponse(portfolioContext, container);
 
 	List<Community>? communities = await portfolioContext.Communities.ToListAsync();
 	using ProgressBar progressBar = new(communities.Count, $"Building responses (1 of {communities.Count})");
@@ -29,6 +30,7 @@ if (cosmosConnectionString is not null)
 		await getCommunityDigitalAssets.BuildAsync(community.CommunityNumber);
 		await getCommunityPricing.BuildAsync(community.CommunityNumber);
 		await getCommunityAttributes.BuildAsync(community.CommunityNumber);
+		await getCommunityListing.BuildAsync(community.CommunityNumber);
 		progressBar.Tick($"Building responses ({progressBar.CurrentTick + 1} of {progressBar.MaxTicks})");
 	}
 
