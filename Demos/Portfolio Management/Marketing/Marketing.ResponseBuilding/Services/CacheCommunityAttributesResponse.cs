@@ -1,6 +1,6 @@
 ﻿namespace SLS.Marketing.ResponseBuilding;
 
-public class CacheCommunityAttributesResponse : CacheResponseBase2, ICacheCommunityAttributesResponse
+public class CacheCommunityAttributesResponse : CacheResponseBase, ICacheCommunityAttributesResponse
 {
 
 	public CacheCommunityAttributesResponse(Container cosmosContainer) : base(cosmosContainer) { }

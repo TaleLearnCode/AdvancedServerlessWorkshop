@@ -3,15 +3,11 @@
 public abstract class CacheResponseBase
 {
 
-	protected readonly PortfolioContext _portfolioContext;
 	private readonly Container _cosmosContainer;
 
-	protected CacheResponseBase(
-		PortfolioContext portfolioContext,
-		Container cosmosContainer)
+	protected CacheResponseBase(Container container)
 	{
-		_portfolioContext = portfolioContext;
-		_cosmosContainer = cosmosContainer;
+		_cosmosContainer = container;
 	}
 
 	protected async Task<CacheResponseResult> UpsertCosmosItemAsync<T>(
@@ -56,9 +52,9 @@ public abstract class CacheResponseBase
 		}
 	}
 
-	protected async Task<Community?> GetCommunityAsync(string communityNumber)
+	protected static async Task<Community?> GetCommunityAsync(PortfolioContext portfolioContext, string communityNumber)
 	{
-		return await _portfolioContext.Communities
+		return await portfolioContext.Communities
 			.FirstOrDefaultAsync(x => x.CommunityNumber == communityNumber);
 	}
 
@@ -68,12 +64,13 @@ public abstract class CacheResponseBase
 		return new() { "en-US", string.Empty };
 	}
 
-	protected async Task<Dictionary<string, List<DigitalAssetResponse>>?> GetDigitalAssetsAsync(
+	protected static async Task<Dictionary<string, List<DigitalAssetResponse>>?> GetDigitalAssetsAsync(
+		PortfolioContext portfolioContext,
 		int communityId,
 		string languageCulture,
 		string? defaultLanguageCulture)
 	{
-		List<CommunityDigitalAsset>? communityDigitalAssets = await _portfolioContext.CommunityDigitalAssets
+		List<CommunityDigitalAsset>? communityDigitalAssets = await portfolioContext.CommunityDigitalAssets
 			.Include(x => x.DigitalAsset)
 				.ThenInclude(x => x.DigitalAssetType)
 			.Where(x => x.CommunityId == communityId)
@@ -88,8 +85,8 @@ public abstract class CacheResponseBase
 				{
 					Discriminator = communityDigitalAsset.DigitalAsset.Discriminator,
 					Name = communityDigitalAsset.DigitalAsset.DigitalAssetName,
-					Caption = await GetContentCopyAsync(communityDigitalAsset.DigitalAsset.CaptionId, languageCulture, defaultLanguageCulture),
-					AltText = await GetContentCopyAsync(communityDigitalAsset.DigitalAsset.AltTextId, languageCulture, defaultLanguageCulture),
+					Caption = await GetContentCopyAsync(portfolioContext, communityDigitalAsset.DigitalAsset.CaptionId, languageCulture, defaultLanguageCulture),
+					AltText = await GetContentCopyAsync(portfolioContext, communityDigitalAsset.DigitalAsset.AltTextId, languageCulture, defaultLanguageCulture),
 					Url = communityDigitalAsset.DigitalAsset.DigitalAssetUrl.ToUri(),
 					ThumbnailUrl = communityDigitalAsset.DigitalAsset.ThumbnailUrl.ToUri(),
 					IsFeatured = communityDigitalAsset.IsFeatured
@@ -101,14 +98,15 @@ public abstract class CacheResponseBase
 			return default;
 	}
 
-	protected async Task<string?> GetContentCopyAsync(
+	protected static async Task<string?> GetContentCopyAsync(
+		PortfolioContext portfolioContext,
 		int? contentId,
 		string languageCulture,
 		string? defaultLanguageCulture)
 	{
 		if (contentId is not null)
 		{
-			Content? content = await _portfolioContext.Contents
+			Content? content = await portfolioContext.Contents
 				.Include(x => x.ContentCopies)
 				.FirstOrDefaultAsync(x => x.ContentId == contentId);
 			if (content is not null && content.ContentCopies.Any())
@@ -123,13 +121,13 @@ public abstract class CacheResponseBase
 		return default;
 	}
 
-	protected async Task<int> GetCommunityStartingAtPriceAsync(int communityId)
+	protected static async Task<int> GetCommunityStartingAtPriceAsync(PortfolioContext portfolioContext, int communityId)
 	{
 
 		int availableStartingAtPrice = 0;
 		int unavailableStartingAtPrice = 0;
 
-		List<Room>? rooms = await _portfolioContext.Rooms
+		List<Room>? rooms = await portfolioContext.Rooms
 			.Include(x => x.RoomRates)
 				.ThenInclude(x => x.PayorType)
 			.Include(x => x.RoomAvailability)
@@ -159,10 +157,13 @@ public abstract class CacheResponseBase
 			return default;
 	}
 
-	protected async Task<Dictionary<string, PricingByCareTypeResponse>?> GetCommunityPricingAsync(int communityId, RoomGrouping roomGrouping)
+	protected static async Task<Dictionary<string, PricingByCareTypeResponse>?> GetCommunityPricingAsync(
+		PortfolioContext portfolioContext,
+		int communityId,
+		RoomGrouping roomGrouping)
 	{
 
-		List<CommunityCareType> communityCareTypes = await _portfolioContext.CommunityCareTypes
+		List<CommunityCareType> communityCareTypes = await portfolioContext.CommunityCareTypes
 			.Include(x => x.CareType)
 			.Where(x => x.CommunityId == communityId)
 			.ToListAsync();
@@ -179,18 +180,18 @@ public abstract class CacheResponseBase
 					RoomTypes = new Dictionary<string, PricingByRoomTypeResponse>()
 				});
 				Dictionary<string, CareTypePricingResponses> careTypePricingResponses = new();
-				List<CommunityRoomType> communityRoomTypes = await _portfolioContext.CommunityRoomTypes
+				List<CommunityRoomType> communityRoomTypes = await portfolioContext.CommunityRoomTypes
 					.Include(x => x.FloorPlan)
 					.Where(x => x.CommunityId == communityId && x.CareTypeId == careType.CareTypeId)
 					.ToListAsync();
 				foreach (CommunityRoomType communityRoomType in communityRoomTypes)
 				{
 
-					(string Key, string Name) = await GetRoomTypeKeyAndNameAsync(roomGrouping, communityRoomType.RoomTypeId);
+					(string Key, string Name) = await GetRoomTypeKeyAndNameAsync(portfolioContext, roomGrouping, communityRoomType.RoomTypeId);
 					PricingByRoomTypeResponse availableResponse = InitializePricingByRoomTypeResponse(Name, communityRoomType.FloorPlan?.DigitalAssetUrl.ToUri());
 					PricingByRoomTypeResponse unavailableResponse = InitializePricingByRoomTypeResponse(Name, communityRoomType.FloorPlan?.DigitalAssetUrl.ToUri());
 
-					List<Room> rooms = await _portfolioContext.Rooms
+					List<Room> rooms = await portfolioContext.Rooms
 						.Include(x => x.RoomAvailability)
 						.Include(x => x.RoomRates)
 							.ThenInclude(x => x.PayorType)
@@ -262,11 +263,12 @@ public abstract class CacheResponseBase
 		}
 	}
 
-	protected async Task<(string Key, string Name)> GetRoomTypeKeyAndNameAsync(
+	protected static async Task<(string Key, string Name)> GetRoomTypeKeyAndNameAsync(
+		PortfolioContext portfolioContext,
 		RoomGrouping roomGrouping,
 		int roomTypeId)
 	{
-		RoomType? roomType = await _portfolioContext.RoomTypes
+		RoomType? roomType = await portfolioContext.RoomTypes
 			.Include(x => x.RoomStyle)
 			.Include(x => x.RoomTypeCategory)
 			.FirstOrDefaultAsync(x => x.RoomTypeId == roomTypeId);
@@ -303,12 +305,13 @@ public abstract class CacheResponseBase
 		return new() { RoomGrouping.RoomType, RoomGrouping.RoomTypeCategory, RoomGrouping.RoomStyle };
 	}
 
-	protected async Task<Dictionary<string, List<CommunityAttributeResponse>>?> GetCommunityAttributesAsync(
+	protected static async Task<Dictionary<string, List<CommunityAttributeResponse>>?> GetCommunityAttributesAsync(
+		PortfolioContext portfolioContext,
 		int communityId,
 		string languageCulture,
 		string? defaultLanguageCulture)
 	{
-		List<CommunityCommunityAttribute>? communityCommunityAttributes = await _portfolioContext.CommunityCommunityAttributes
+		List<CommunityCommunityAttribute>? communityCommunityAttributes = await portfolioContext.CommunityCommunityAttributes
 			.Include(x => x.CommunityAttribute)
 				.ThenInclude(x => x.CommunityAttributeType)
 			.Include(x => x.CommunityAttribute)
@@ -320,18 +323,18 @@ public abstract class CacheResponseBase
 		if (communityCommunityAttributes.Any())
 		{
 			Dictionary<string, List<CommunityAttributeResponse>> response = new();
-			foreach (CommunityCommunityAttribute communityCommunityAttribute in communityCommunityAttributes)
+			foreach (CommunityAttribute? communityAttribute in communityCommunityAttributes.Select(x => x.CommunityAttribute))
 			{
-				string attributeTypeKey = communityCommunityAttribute.CommunityAttribute.CommunityAttributeType.ExternalId ?? communityCommunityAttribute.CommunityAttribute.CommunityAttributeTypeId.ToString();
+				string attributeTypeKey = communityAttribute.CommunityAttributeType.ExternalId ?? communityAttribute.CommunityAttributeTypeId.ToString();
 				response.TryAdd(attributeTypeKey, new List<CommunityAttributeResponse>());
-				string? label = await GetContentCopyAsync(communityCommunityAttribute.CommunityAttribute.LabelId, languageCulture, defaultLanguageCulture);
+				string? label = await GetContentCopyAsync(portfolioContext, communityAttribute.LabelId, languageCulture, defaultLanguageCulture);
 				if (label is not null)
 				{
 					response[attributeTypeKey].Add(new()
 					{
 						Label = label,
-						IconUrl = communityCommunityAttribute.CommunityAttribute.Icon.DigitalAssetUrl.ToUri(),
-						AltText = await GetContentCopyAsync(communityCommunityAttribute.CommunityAttribute.Icon.AltTextId, languageCulture, defaultLanguageCulture)
+						IconUrl = communityAttribute.Icon.DigitalAssetUrl.ToUri(),
+						AltText = await GetContentCopyAsync(portfolioContext, communityAttribute.Icon.AltTextId, languageCulture, defaultLanguageCulture)
 					});
 				}
 			}
@@ -341,16 +344,16 @@ public abstract class CacheResponseBase
 			return default;
 	}
 
-	protected async Task<string?> GetCommunityPhoneNumberAsync(int communityId)
+	protected static async Task<string?> GetCommunityPhoneNumberAsync(PortfolioContext portfolioContext, int communityId)
 	{
-		return (await _portfolioContext.CommunityPhoneNumbers
+		return (await portfolioContext.CommunityPhoneNumbers
 			.FirstOrDefaultAsync(x => x.CommunityId == communityId && x.IsListingNumber))?.PhoneNumber;
 	}
 
-	protected async Task<PostalAddressResponse?> GetCommunityPostalAddressAsync(int communityId)
+	protected static async Task<PostalAddressResponse?> GetCommunityPostalAddressAsync(PortfolioContext portfolioContext, int communityId)
 	{
 
-		CommunityPostalAddress? communityPostalAddress = await _portfolioContext.CommunityPostalAddresses
+		CommunityPostalAddress? communityPostalAddress = await portfolioContext.CommunityPostalAddresses
 			.FirstOrDefaultAsync(x => x.CommunityId == communityId && x.IsListingAddress);
 		if (communityPostalAddress is not null)
 			return new PostalAddressResponse()
@@ -365,6 +368,5 @@ public abstract class CacheResponseBase
 		else
 			return default;
 	}
-
 
 }

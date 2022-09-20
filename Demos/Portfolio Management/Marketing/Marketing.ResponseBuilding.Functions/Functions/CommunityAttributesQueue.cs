@@ -17,7 +17,6 @@ public class CommunityAttributesQueue
 	public async Task RunAsync([QueueTrigger("%queueCommunityAttributes%", Connection = "StorageConnectionString")] string queueMessage)
 	{
 		await _services.BuildAsync(queueMessage);
-		_logger.LogWarning("Done");
 	}
 
 }

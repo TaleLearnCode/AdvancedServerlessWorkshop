@@ -17,7 +17,6 @@ public class CommunityPricingQueue
 	public async Task RunAsync([QueueTrigger("%queueCommunityPricing%", Connection = "StorageConnectionString")] string queueMessage)
 	{
 		await _services.BuildAsync(queueMessage);
-		_logger.LogWarning("Done");
 	}
 
 }
