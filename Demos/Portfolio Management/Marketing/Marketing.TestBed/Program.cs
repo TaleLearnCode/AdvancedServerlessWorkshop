@@ -16,6 +16,8 @@ async Task QueueBuildsAsync()
 {
 	using PortfolioContext portfolioContext = new();
 	List<Community>? communities = await portfolioContext.Communities.ToListAsync();
+	Console.WriteLine("Press [Enter] to start...");
+	Console.ReadLine();
 	using ProgressBar progressBar = new(communities.Count, $"Building responses (1 of {communities.Count})");
 	foreach (Community community in communities)
 	{
@@ -64,11 +66,11 @@ async Task BuildDirectlyAsync()
 		Database cosmosDatabase = await cosmosClient.CreateDatabaseIfNotExistsAsync("ASW");
 		Container container = await cosmosDatabase.CreateContainerIfNotExistsAsync("Northstar", "/Discriminator");
 
-		ICacheCommunityDetailsResponse getCommunityDetails = new CacheCommunityDetailsResponse(portfolioContext, container);
-		ICacheCommunityDigitalAssetsResponse getCommunityDigitalAssets = new CacheCommunityDigitalAssetsResponse(portfolioContext, container);
-		ICacheCommunityPricingResponse getCommunityPricing = new CacheCommunityPricingResponse(portfolioContext, container);
-		ICacheCommunityAttributesResponse getCommunityAttributes = new CacheCommunityAttributesResponse(portfolioContext, container);
-		ICacheCommunityListingResponse getCommunityListing = new CacheCommunityListingResponse(portfolioContext, container);
+		ICacheCommunityDetailsResponse getCommunityDetails = new CacheCommunityDetailsResponse(container);
+		ICacheCommunityDigitalAssetsResponse getCommunityDigitalAssets = new CacheCommunityDigitalAssetsResponse(container);
+		ICacheCommunityPricingResponse getCommunityPricing = new CacheCommunityPricingResponse(container);
+		ICacheCommunityAttributesResponse getCommunityAttributes = new CacheCommunityAttributesResponse(container);
+		ICacheCommunityListingResponse getCommunityListing = new CacheCommunityListingResponse(container);
 
 		List<Community>? communities = await portfolioContext.Communities.ToListAsync();
 		using ProgressBar progressBar = new(communities.Count, $"Building responses (1 of {communities.Count})");

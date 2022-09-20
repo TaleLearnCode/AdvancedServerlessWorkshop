@@ -1,21 +1,23 @@
 ﻿namespace SLS.Marketing.ResponseBuilding;
 
-public class CacheCommunityDigitalAssetsResponse : CacheResponseBase, ICacheCommunityDigitalAssetsResponse
+public class CacheCommunityDigitalAssetsResponse : CacheResponseBase2, ICacheCommunityDigitalAssetsResponse
 {
 
-	public CacheCommunityDigitalAssetsResponse(
-		PortfolioContext portfolioContext,
-		Container cosmosContainer) : base(portfolioContext, cosmosContainer) { }
+	public CacheCommunityDigitalAssetsResponse(Container cosmosContainer) : base(cosmosContainer) { }
 
 	public async Task BuildAsync(string communityNumber)
 	{
-		Community? community = await GetCommunityAsync(communityNumber);
+		using PortfolioContext portfolioContext = new PortfolioContext();
+		Community? community = await GetCommunityAsync(portfolioContext, communityNumber);
 		if (community is not null)
 			foreach (string languageCulture in GetCommunityLanguageCultures())
-				await BuildAsync(community, languageCulture);
+				await BuildAsync(portfolioContext, community, languageCulture);
 	}
 
-	private async Task<CacheResponseResult> BuildAsync(Community community, string languageCulture)
+	private async Task<CacheResponseResult> BuildAsync(
+		PortfolioContext portfolioContext,
+		Community community,
+		string languageCulture)
 	{
 		return await UpsertCosmosItemAsync(
 			CachedResponseDiscriminators.CommunityDigitalAssets,
@@ -25,7 +27,7 @@ public class CacheCommunityDigitalAssetsResponse : CacheResponseBase, ICacheComm
 				{
 					Number = community.CommunityNumber,
 					Name = community.CommunityName,
-					DigitalAssets = await GetDigitalAssetsAsync(community.CommunityId, languageCulture, community.LanguageCultureCode)
+					DigitalAssets = await GetDigitalAssetsAsync(portfolioContext, community.CommunityId, languageCulture, community.LanguageCultureCode)
 				}
 			});
 	}

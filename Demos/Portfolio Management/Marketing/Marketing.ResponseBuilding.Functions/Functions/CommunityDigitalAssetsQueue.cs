@@ -15,9 +15,10 @@ public class CommunityDigitalAssetsQueue
 	}
 
 	[Function("CommunityDigitalAssetsQueue")]
-	public async Task RunAsync([QueueTrigger("queueCommunityDigitalAssets", Connection = "StorageConnectionString")] string queueMessage)
+	public async Task RunAsync([QueueTrigger("%queueCommunityDigitalAssets%", Connection = "StorageConnectionString")] string queueMessage)
 	{
 		await _services.BuildAsync(queueMessage);
+		_logger.LogWarning("Done");
 	}
 
 }

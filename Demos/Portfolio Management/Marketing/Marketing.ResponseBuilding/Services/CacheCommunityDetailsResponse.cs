@@ -1,22 +1,22 @@
 ﻿namespace SLS.Marketing.ResponseBuilding;
 
-public class CacheCommunityDetailsResponse : CacheResponseBase, ICacheCommunityDetailsResponse
+public class CacheCommunityDetailsResponse : CacheResponseBase2, ICacheCommunityDetailsResponse
 {
 
-	public CacheCommunityDetailsResponse(
-		PortfolioContext portfolioContext,
-		Container cosmosContainer) : base(portfolioContext, cosmosContainer) { }
+	public CacheCommunityDetailsResponse(Container cosmosContainer) : base(cosmosContainer) { }
 
 	public async Task BuildAsync(string communityNumber)
 	{
-		Community? community = await GetCommunityAsync(communityNumber);
+		using PortfolioContext portfolioContext = new PortfolioContext();
+		Community? community = await GetCommunityAsync(portfolioContext, communityNumber);
 		if (community is not null)
 			foreach (string languageCulture in GetCommunityLanguageCultures())
 				foreach (RoomGrouping roomGrouping in GetRoomGroupings())
-					await BuildAsync(community, roomGrouping, languageCulture);
+					await BuildAsync(portfolioContext, community, roomGrouping, languageCulture);
 	}
 
 	private async Task<CacheResponseResult> BuildAsync(
+		PortfolioContext portfolioContext,
 		Community community,
 		RoomGrouping roomGrouping,
 		string languageCulture)
@@ -29,12 +29,12 @@ public class CacheCommunityDetailsResponse : CacheResponseBase, ICacheCommunityD
 				{
 					Number = community.CommunityNumber,
 					Name = community.CommunityName,
-					PhoneNumber = await GetCommunityPhoneNumberAsync(community.CommunityId),
-					PostalAddress = await GetCommunityPostalAddressAsync(community.CommunityId),
-					StartingAtPrice = await GetCommunityStartingAtPriceAsync(community.CommunityId),
-					Pricing = await GetCommunityPricingAsync(community.CommunityId, roomGrouping),
-					DigitalAssets = await GetDigitalAssetsAsync(community.CommunityId, languageCulture, community.LanguageCultureCode),
-					Attributes = await GetCommunityAttributesAsync(community.CommunityId, languageCulture, community.LanguageCultureCode)
+					PhoneNumber = await GetCommunityPhoneNumberAsync(portfolioContext, community.CommunityId),
+					PostalAddress = await GetCommunityPostalAddressAsync(portfolioContext, community.CommunityId),
+					StartingAtPrice = await GetCommunityStartingAtPriceAsync(portfolioContext, community.CommunityId),
+					Pricing = await GetCommunityPricingAsync(portfolioContext, community.CommunityId, roomGrouping),
+					DigitalAssets = await GetDigitalAssetsAsync(portfolioContext, community.CommunityId, languageCulture, community.LanguageCultureCode),
+					Attributes = await GetCommunityAttributesAsync(portfolioContext, community.CommunityId, languageCulture, community.LanguageCultureCode)
 				}
 			});
 	}

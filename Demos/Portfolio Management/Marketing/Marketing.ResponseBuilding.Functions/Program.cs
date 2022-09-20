@@ -9,11 +9,11 @@ var host = new HostBuilder()
 	.ConfigureFunctionsWorkerDefaults()
 	.ConfigureServices(s =>
 	{
-		s.AddSingleton<ICacheCommunityDetailsResponse>((s) => { return new CacheCommunityDetailsResponse(portfolioContext, cosmosContainer); });
-		s.AddSingleton<ICacheCommunityDigitalAssetsResponse>((s) => { return new CacheCommunityDigitalAssetsResponse(portfolioContext, cosmosContainer); });
-		s.AddSingleton<ICacheCommunityPricingResponse>((s) => { return new CacheCommunityPricingResponse(portfolioContext, cosmosContainer); });
-		s.AddSingleton<ICacheCommunityAttributesResponse>((s) => { return new CacheCommunityAttributesResponse(portfolioContext, cosmosContainer); });
-		s.AddSingleton<ICacheCommunityListingResponse>((s) => { return new CacheCommunityListingResponse(portfolioContext, cosmosContainer); });
+		s.AddSingleton<ICacheCommunityDetailsResponse>((s) => { return new CacheCommunityDetailsResponse(cosmosContainer); });
+		s.AddSingleton<ICacheCommunityDigitalAssetsResponse>((s) => { return new CacheCommunityDigitalAssetsResponse(cosmosContainer); });
+		s.AddSingleton<ICacheCommunityPricingResponse>((s) => { return new CacheCommunityPricingResponse(cosmosContainer); });
+		s.AddSingleton<ICacheCommunityAttributesResponse>((s) => { return new CacheCommunityAttributesResponse(cosmosContainer); });
+		s.AddSingleton<ICacheCommunityListingResponse>((s) => { return new CacheCommunityListingResponse(cosmosContainer); });
 	})
 	.Build();
 

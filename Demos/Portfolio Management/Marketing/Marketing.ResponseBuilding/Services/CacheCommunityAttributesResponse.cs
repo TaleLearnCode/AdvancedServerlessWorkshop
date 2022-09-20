@@ -1,21 +1,21 @@
 ﻿namespace SLS.Marketing.ResponseBuilding;
 
-public class CacheCommunityAttributesResponse : CacheResponseBase, ICacheCommunityAttributesResponse
+public class CacheCommunityAttributesResponse : CacheResponseBase2, ICacheCommunityAttributesResponse
 {
 
-	public CacheCommunityAttributesResponse(
-		PortfolioContext portfolioContext,
-		Container cosmosContainer) : base(portfolioContext, cosmosContainer) { }
+	public CacheCommunityAttributesResponse(Container cosmosContainer) : base(cosmosContainer) { }
 
 	public async Task BuildAsync(string communityNumber)
 	{
-		Community? community = await GetCommunityAsync(communityNumber);
+		using PortfolioContext portfolioContext = new();
+		Community? community = await GetCommunityAsync(portfolioContext, communityNumber);
 		if (community is not null)
 			foreach (string languageCulture in GetCommunityLanguageCultures())
-				await BuildAsync(community, languageCulture);
+				await BuildAsync(portfolioContext, community, languageCulture);
 	}
 
 	private async Task<CacheResponseResult> BuildAsync(
+		PortfolioContext portfolioContext,
 		Community community,
 		string languageCulture)
 	{
@@ -27,7 +27,7 @@ public class CacheCommunityAttributesResponse : CacheResponseBase, ICacheCommuni
 				{
 					Number = community.CommunityNumber,
 					Name = community.CommunityName,
-					Attributes = await GetCommunityAttributesAsync(community.CommunityId, languageCulture, community.LanguageCultureCode)
+					Attributes = await GetCommunityAttributesAsync(portfolioContext, community.CommunityId, languageCulture, community.LanguageCultureCode)
 				}
 			});
 	}

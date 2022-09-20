@@ -1,24 +1,24 @@
 ﻿namespace SLS.Marketing.ResponseBuilding;
 
-public class CacheCommunityListingResponse : CacheResponseBase, ICacheCommunityListingResponse
+public class CacheCommunityListingResponse : CacheResponseBase2, ICacheCommunityListingResponse
 {
 
-	public CacheCommunityListingResponse(
-		PortfolioContext portfolioContext,
-		Container cosmosContainer) : base(portfolioContext, cosmosContainer) { }
+	public CacheCommunityListingResponse(Container cosmosContainer) : base(cosmosContainer) { }
 
 	public async Task BuildAsync(string communityNumber)
 	{
-		Community? community = await GetCommunityAsync(communityNumber);
+		using PortfolioContext portfolioContext = new PortfolioContext();
+		Community? community = await GetCommunityAsync(portfolioContext, communityNumber);
 		if (community is not null)
 			foreach (string languageCulture in GetCommunityLanguageCultures())
 			{
-				await BuildAsync(community, await GetCommunityPostalAddressAsync(community.CommunityId), languageCulture, true);
-				await BuildAsync(community, await GetCommunityPostalAddressAsync(community.CommunityId), languageCulture, false);
+				await BuildAsync(portfolioContext, community, await GetCommunityPostalAddressAsync(portfolioContext, community.CommunityId), languageCulture, true);
+				await BuildAsync(portfolioContext, community, await GetCommunityPostalAddressAsync(portfolioContext, community.CommunityId), languageCulture, false);
 			}
 	}
 
 	private async Task<CacheResponseResult> BuildAsync(
+		PortfolioContext portfolioContext,
 		Community community,
 		PostalAddressResponse? postalAddress,
 		string languageCulture,
@@ -39,29 +39,29 @@ public class CacheCommunityListingResponse : CacheResponseBase, ICacheCommunityL
 					PostalCode = postalAddress?.PostalCode,
 					Longitude = community.Longitude,
 					Latitude = community.Latitude,
-					PhoneNumber = await GetCommunityPhoneNumberAsync(community.CommunityId),
-					CommunityPhotoUrl = await GetCommunityPhotoUrl(community.CommunityId),
-					StartingAtPrice = await GetCommunityStartingAtPriceAsync(community.CommunityId),
+					PhoneNumber = await GetCommunityPhoneNumberAsync(portfolioContext, community.CommunityId),
+					CommunityPhotoUrl = await GetCommunityPhotoUrl(portfolioContext, community.CommunityId),
+					StartingAtPrice = await GetCommunityStartingAtPriceAsync(portfolioContext, community.CommunityId),
 					IsFeatured = community.IsFeatured,
-					CareTypes = await GetCareTypeItemsAsync(community.CommunityId),
-					Attributes = (includeCommunityAttributes) ? await GetCommunityAttributesAsync(community.CommunityId, languageCulture, community.LanguageCultureCode) : null
+					CareTypes = await GetCareTypeItemsAsync(portfolioContext, community.CommunityId),
+					Attributes = (includeCommunityAttributes) ? await GetCommunityAttributesAsync(portfolioContext, community.CommunityId, languageCulture, community.LanguageCultureCode) : null
 				},
 				IsFetured = community.IsFeatured,
 				IncludeAttributes = includeCommunityAttributes
 			});
 	}
 
-	private async Task<Uri?> GetCommunityPhotoUrl(int communityId)
+	private async Task<Uri?> GetCommunityPhotoUrl(PortfolioContext portfolioContext, int communityId)
 	{
-		Community? community = await _portfolioContext.Communities
+		Community? community = await portfolioContext.Communities
 			.Include(x => x.ProfileImage)
 			.FirstOrDefaultAsync(x => x.CommunityId == communityId);
 		return community?.ProfileImage?.DigitalAssetUrl.ToUri();
 	}
 
-	private async Task<List<CareTypeItemResponse>?> GetCareTypeItemsAsync(int communityId)
+	private async Task<List<CareTypeItemResponse>?> GetCareTypeItemsAsync(PortfolioContext portfolioContext, int communityId)
 	{
-		List<CommunityCareType>? communityCareTypes = await _portfolioContext.CommunityCareTypes
+		List<CommunityCareType>? communityCareTypes = await portfolioContext.CommunityCareTypes
 			.Include(x => x.CareType)
 			.Where(x => x.CommunityId == communityId)
 			.ToListAsync();
