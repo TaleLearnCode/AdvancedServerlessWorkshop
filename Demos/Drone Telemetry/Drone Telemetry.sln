@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33006.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drone.Domain", "Drone.Domain\Drone.Domain.csproj", "{59885EE4-4EFE-47D3-ABDA-082138AD267F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Done.Telemetry", "Done.Telemetry\Done.Telemetry.csproj", "{09531787-9999-4BB0-BBF2-3273798F8DD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drone.Common", "Drone.Common\Drone.Common.csproj", "{737F8158-2EFC-475A-B78D-0909E59E4823}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drone.Simulator", "Drone.Simulator\Drone.Simulator.csproj", "{FA3080BE-80DF-499E-9CB8-DDE0D454C450}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{59885EE4-4EFE-47D3-ABDA-082138AD267F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59885EE4-4EFE-47D3-ABDA-082138AD267F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59885EE4-4EFE-47D3-ABDA-082138AD267F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59885EE4-4EFE-47D3-ABDA-082138AD267F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09531787-9999-4BB0-BBF2-3273798F8DD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09531787-9999-4BB0-BBF2-3273798F8DD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09531787-9999-4BB0-BBF2-3273798F8DD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09531787-9999-4BB0-BBF2-3273798F8DD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{737F8158-2EFC-475A-B78D-0909E59E4823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{737F8158-2EFC-475A-B78D-0909E59E4823}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{737F8158-2EFC-475A-B78D-0909E59E4823}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{737F8158-2EFC-475A-B78D-0909E59E4823}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA3080BE-80DF-499E-9CB8-DDE0D454C450}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA3080BE-80DF-499E-9CB8-DDE0D454C450}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA3080BE-80DF-499E-9CB8-DDE0D454C450}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA3080BE-80DF-499E-9CB8-DDE0D454C450}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1F594E03-B961-4DD1-BFD5-E8B70527BC59}
+	EndGlobalSection
+EndGlobal
