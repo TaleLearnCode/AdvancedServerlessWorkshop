@@ -79,6 +79,6 @@ async Task<HttpStatusCode> SendTelemetryAsync(DeviceState deviceState)
 {
 	string json = JsonSerializer.Serialize(deviceState, _jsonSerializerOptions);
 	using StringContent jsonContent = new(json, Encoding.UTF8, "application/json");
-	using HttpResponseMessage response = await _httpClient.PutAsync("http://localhost:7172/api/UpdateDeviceState", jsonContent);
+	using HttpResponseMessage response = await _httpClient.PutAsync("http://localhost:7035/api/UpdateDeviceState", jsonContent);
 	return response.StatusCode;
 }
