@@ -47,4 +47,4 @@ To wrap up our day of advanced serverless topics, please bring your questions fo
 
 | Event | Location | Date | Time | Room | Downloads |
 |-------|:--------:|-----:|-----:|-----:|----------:|
-| [Serverless Architecture Conference](https://serverless-architecture.io/serverless-architecture-design/advanced-serverless-workshop/) | Berlin, Germany | October 17, 2022 | 9:00 am CEST | TBA | Available Afterwards |
+| [Serverless Architecture Conference](https://serverless-architecture.io/serverless-architecture-design/advanced-serverless-workshop/) | Berlin, Germany | October 17, 2022 | 9:00 am CEST | TBA | [Slides](Presentations/Advanced%20Serverless%20Workshop%20-%20Azure.pdf) |
