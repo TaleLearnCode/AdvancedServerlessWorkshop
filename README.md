@@ -50,5 +50,5 @@ To wrap up our day of advanced serverless topics, please bring your questions fo
 
 | Event | Location | Date | Time | Room | Downloads |
 |-------|:--------:|-----:|-----:|-----:|----------:|
-| [Serverless Architecture Conference - London 2023](https://serverless-architecture.io/serverless-architecture-design/advanced-serverless-workshop/) | London, England | April 27, 2023 | 8:45 am BST | TBA | Available Afterwards |
+| [Serverless Architecture Conference - London 2023](https://serverless-architecture.io/serverless-architecture-design/advanced-serverless-workshop/) | London, England | April 27, 2023 | 8:45 am BST | Edwards 7 | [Slides](https://github.com/TaleLearnCode/AdvancedServerlessWorkshop/blob/main/Presentations/AdvancedServerlessWorkshop_Azure_London2023.pdf) |
 | [Serverless Architecture Conference - Berlin 2022](https://serverless-architecture.io/serverless-architecture-design/advanced-serverless-workshop/) | Berlin, Germany | October 17, 2022 | 9:00 am CEST | TBA | [Slides](Presentations/AdvancedServerlessWorkshop_Azure_Berlin2023.pdf) |
