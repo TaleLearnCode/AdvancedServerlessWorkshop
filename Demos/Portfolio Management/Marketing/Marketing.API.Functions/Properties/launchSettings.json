@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "Marketing.API.Functions": {
-      "commandName": "Project",
-      "commandLineArgs": "--port 7283",
-      "launchBrowser": false
-    }
-  }
-}
