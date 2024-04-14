@@ -1,18 +1,13 @@
-![Advanced Serverless Workshop - Azure](Thumbnail.jpg)
+# Advanced Serverless Workshop
 
-## Description
-Have you been doing serverless for a while but don’t feel like you’re getting the most out of it? This interactive workshop will allow you to interact with experienced serverless professionals and gain three different perspectives on how to level up your serverless architecture.
+![Advanced Serverless Workshop](thumbnail.jpg)
 
-* Learn new approaches and design patterns.
-* Hear stories from the trenches about what worked (and what did not).
-* Gain perspective on cost, performance, scalability, and resilience.
-* Includes examples covering AWS Lambda, Azure Function, and Google Functions  
+Welcome to the Advanced Serverless Workshop repository! This repository hosts materials, demo code, and resources for our immersive full-day workshops on advanced serverless architectures across leading cloud platforms: Google Cloud Platform (GCP), Amazon Web Services (AWS), and Microsoft Azure.
 
-This four-part workshop is designed for experienced serverless developers and architects who want to deepen their knowledge, learn exciting new aspects of serverless technology, and network with other serverless experts. Some perspectives on the major platforms will be provided, but this workshop is intended for all practitioners, regardless of their current technology stack.
+Our workshops comprehensively explore serverless computing, delving deep into practical implementations, best practices, and platform-specific solutions for real-world business problems. Led by expert practitioners, these sessions offer invaluable insights and hands-on experiences to help you elevate your serverless architecture skills.
 
 ## Presentations
-| Event | Date | Details |
-|---|---|---|
-| London 2024 | April 11, 2024 | [Details](https://github.com/TaleLearnCode/ASW-London-2024) 
-| London 2023 | April 27, 2023 | [Details](https://github.com/TaleLearnCode/ASW-London-2023)
-| Berlin 2022 | October 17, 2022 | [Details](https://github.com/TaleLearnCode/ASW-Berlin-2022)
+
+- [Serverless Architecture Conference - London 2024](London-2024/README.md)
+- [Serverless Architecture Conference - London 2023](London-2023/README.md)
+- [Serverless Architecture Conference - Berlin 2022](Berlin-2022/README.md)
