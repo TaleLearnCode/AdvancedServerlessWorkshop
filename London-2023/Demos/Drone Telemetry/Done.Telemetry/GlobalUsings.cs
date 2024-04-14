@@ -1,0 +1,16 @@
+﻿global using Azure.Messaging.EventHubs.Producer;
+global using Azure.Storage.Queues;
+global using Drone.Common;
+global using Drone.Domain.Entities;
+global using Drone.Domain.Extensions;
+global using Drone.Domain.Repository;
+global using Microsoft.Azure.Cosmos;
+global using Microsoft.Azure.Functions.Worker;
+global using Microsoft.Azure.Functions.Worker.Http;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Hosting;
+global using Microsoft.Extensions.Logging;
+global using System.Net;
+global using System.Text.Json;
+global using System.Text.Json.Serialization;
+global using TaleLearnCode;

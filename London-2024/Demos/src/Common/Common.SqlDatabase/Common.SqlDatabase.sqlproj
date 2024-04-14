@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Common.SqlDatabase</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{bb89497a-c6db-40d9-8b03-4141cb570c04}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Common.SqlDatabase</RootNamespace>
+    <AssemblyName>Common.SqlDatabase</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunSqlCodeAnalysis>True</RunSqlCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="Scripts" />
+    <Folder Include="Scripts\Populate" />
+    <Folder Include="Scripts\Queries" />
+    <Folder Include="Publish Profiles" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\AircraftType.sql" />
+    <Build Include="Tables\Airline.sql" />
+    <Build Include="Tables\Airport.sql" />
+    <Build Include="Tables\Country.sql" />
+    <Build Include="Tables\CustomerFlightStatus.sql" />
+    <Build Include="Tables\FlightPlan.sql" />
+    <Build Include="Tables\FlightStatus.sql" />
+    <Build Include="Tables\FlightSchedule.sql" />
+    <Build Include="Tables\FlightTelemetry.sql" />
+    <Build Include="Tables\Telemetry.sql" />
+    <Build Include="Tables\TelemetryElectricalSystem.sql" />
+    <Build Include="Tables\TelemetryElectricalSystemFault.sql" />
+    <Build Include="Tables\TelemetryEngineData.sql" />
+    <Build Include="Tables\TelemetryEngineDataFaultCode.sql" />
+    <Build Include="Tables\TelemetryFlightParameter.sql" />
+    <Build Include="Tables\TelemetryFuelSystemData.sql" />
+    <Build Include="Tables\TelemetryFuelTankLevel.sql" />
+    <Build Include="Tables\TelemetryHydraulicSystem.sql" />
+    <Build Include="Tables\TelemetryHydraulicSystemFluidLevel.sql" />
+    <Build Include="Tables\TelemetryLocation.sql" />
+    <Build Include="Tables\WorldRegion.sql" />
+    <None Include="Scripts\Populate\Populate_AircraftType.sql" />
+    <None Include="Scripts\Populate\Populate_Airline.sql" />
+    <None Include="Scripts\Populate\Populate_Airport.sql" />
+    <None Include="Scripts\Populate\Populate_Country.sql" />
+    <None Include="Scripts\Populate\Populate_CustomerFlightStatus.sql" />
+    <None Include="Scripts\Populate\Populate_FlightSchedule.sql" />
+    <None Include="Scripts\Populate\Populate_FlightStatus.sql" />
+    <None Include="Scripts\Populate\Populate_WorldRegion.sql" />
+    <None Include="Scripts\Queries\FlightsInTheAir.sql" />
+    <Build Include="Tables\CustomerFlightStatusToFlightStatus.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Publish Profiles\Beast.publish.publish.xml" />
+    <None Include="Scripts\Populate\Populate_CustomerFlightStatusToFlightStatus.sql" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,1 @@
+This folder contains the assets for the presentation.

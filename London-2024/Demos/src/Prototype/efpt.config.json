@@ -1,0 +1,86 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "FlightTrackerContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": true,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "Prototype3",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[AircraftType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Airline]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Airport]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Country]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CustomerFlightStatus]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[FlightPlan]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[FlightSchedule]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[FlightStatus]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[FlightTelemetry]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ScheduledFlight]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[WorldRegion]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "(localdb)\\MSSQLLocalDB.FlightTracker",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": false,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false
+}

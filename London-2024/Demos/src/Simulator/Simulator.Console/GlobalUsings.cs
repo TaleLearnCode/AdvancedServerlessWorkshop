@@ -1,0 +1,11 @@
+﻿global using Microsoft.EntityFrameworkCore;
+global using System.Diagnostics;
+global using System.Text;
+global using System.Text.Json;
+global using System.Text.Json.Serialization;
+global using TaleLearnCode.FlightTrackingDemo.Messages;
+global using TaleLearnCode.FlightTrackingDemo.Simulator.Console;
+global using TaleLearnCode.FlightTrackingDemo.Simulator.Console.Extensions;
+global using TaleLearnCode.FlightTrackingDemo.Simulator.Console.Models;
+global using TaleLearnCode.FlightTrackingDemo.Simulator.Console.StaticValues;
+global using TaleLearnCode.FlightTrackingDemo.SqlData.Models;

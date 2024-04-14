@@ -1,0 +1,16 @@
+﻿global using Azure;
+global using Azure.Communication.Email;
+global using Azure.Data.Tables;
+global using Microsoft.Azure.Functions.Worker;
+global using Microsoft.Azure.Functions.Worker.Http;
+global using Microsoft.DurableTask;
+global using Microsoft.DurableTask.Client;
+global using Microsoft.Extensions.Logging;
+global using System.Net;
+global using System.Text;
+global using System.Text.Json;
+global using TaleLearnCode.FlightTracker.SubmitFlightPlan.Exceptions;
+global using TaleLearnCode.FlightTracker.SubmitFlightPlan.Extensions;
+global using TaleLearnCode.FlightTracker.SubmitFlightPlan.Models;
+global using TaleLearnCode.FlightTrackingDemo.Messages;
+global using TaleLearnCode.FlightTrackingDemo.SqlData.Models;

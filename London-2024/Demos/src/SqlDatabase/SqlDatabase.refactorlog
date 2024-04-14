@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="a9fe1d2e-ab73-44ce-9fb8-eb2d8f243deb" ChangeDateTime="03/29/2024 23:19:55">
+    <Property Name="ElementName" Value="[dbo].[ScheduledFlight]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="FlightSchedule" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7c800dd4-6bcf-40ea-b8af-ab65e448c624" ChangeDateTime="03/30/2024 05:52:59">
+    <Property Name="ElementName" Value="[dbo].[FlightTelemetry]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="FlightTelemetry" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fb146f32-fb72-4a09-ba84-dcc94f80ae07" ChangeDateTime="03/30/2024 05:53:09">
+    <Property Name="ElementName" Value="[dbo].[FlightTelemetry].[FlightTelemetryId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[FlightTelemetry]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FlightTelemetryId" />
+  </Operation>
+</Operations>

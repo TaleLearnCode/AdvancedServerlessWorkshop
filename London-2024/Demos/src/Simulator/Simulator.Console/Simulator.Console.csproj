@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>TaleLearnCode.FlightTrackingDemo.Simulator.Console</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.Messages\Common.Messages.csproj" />
+    <ProjectReference Include="..\..\Common\Common.SqlData\Common.SqlData.csproj" />
+  </ItemGroup>
+
+</Project>

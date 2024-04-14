@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>SLS.Portfolio.UploadServices</AssemblyName>
+    <RootNamespace>SLS.Portfolio.UploadServices</RootNamespace>
+    <Version>0.0.1-dev</Version>
+    <Authors>Senior Living Systems</Authors>
+    <Product>SLS Portfolio Management</Product>
+    <Description>Provides a set of services used by the SLS Portfolio Management product for uploading data.</Description>
+    <Copyright>2022 Green Events &amp; Technology, LLC. All rights reserved.</Copyright>
+    <ProjectGuid>{67140229-F459-46D7-B9D3-713F426BE1A8}</ProjectGuid>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TinyCsvParser" Version="2.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Portfolio.Repository\Portfolio.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

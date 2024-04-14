@@ -1,0 +1,10 @@
+﻿global using Microsoft.Azure.Cosmos;
+global using Microsoft.EntityFrameworkCore;
+global using SLS.Marketing.CachedResponses;
+global using SLS.Marketing.Requests;
+global using SLS.Marketing.ResponseBuilding.Entities;
+global using SLS.Marketing.ResponseBuilding.Extensions;
+global using SLS.Marketing.Responses;
+global using SLS.Porfolio.Repository;
+global using SLS.Porfolio.Repository.Entiies;
+global using System.Net;
