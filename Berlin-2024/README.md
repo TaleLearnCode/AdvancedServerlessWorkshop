@@ -1,31 +1,36 @@
 ![Advanced Serverless Workshop - Azure](thumbnail.jpg)
 
 ## Description
-Join us for a full-day immersive workshop exploring advanced serverless architectures across Google Cloud Platform (GCP), Amazon Web Services (AWS), and Microsoft Azure. Led by expert practitioners, this comprehensive session will explore practical implementations, best practices, and platform-specific solutions for real-world business problems.
+Immerse yourself in a full-day workshop delving into advanced serverless architectures across Google Cloud Platform (GCP), Amazon Web Services (AWS), and Microsoft Azure. Led by expert practitioners, this session covers practical implementations, best practices, and platform-specific solutions for real-world business problems.
 
 **Agenda:**
 
-1. **Fundamentals of Serverless Architectures:** Explore various architecture styles, cloud design patterns, and software design patterns to gain insights into the fundamental concepts of serverless architectures.
-2. **Real-World Business Problem:** Understand a complex business problem that can be effectively tackled using serverless computing, setting the stage for practical implementation.
-3. **GCP Serverless Solution:** Dive into GCP's serverless offerings as our GCP exert demonstrates a detailed solution to the presented business problem. Witness a working example and gain insight into GCP serverless solutions.
-4. **AWS Serverless Solution:** Explore AWS's serverless capabilities through a detailed demonstration of solving the same business problem. Witness a live implementation showcasing AWS serverless solutions and best practices.
-5. **Azure Serverless Solution:** Discover Azure's serverless ecosystem with a comprehensive demonstration of solving business problems using Azure services. Witness a live implementation and explore Azure's serverless solutions in depth.
-6. **Interactive Discussion Panel:** Engage with expert presenters in a vibrant discussion. Bring forth your questions, whether they pertain to specific implementations across platforms, best practices, or any aspect of your serverless journey. Our panelists are here to address your queries and foster collaborative learning.
+1. Learn serverless architecture fundamentals and cloud and software design patterns.
+2. Understand a complex business problem suited for serverless computing.
+3. Dive into GCP's serverless solutions with a detailed demonstration.
+4. Explore AWS's serverless capabilities with live implementations.
+5. Discover Azure's serverless ecosystem through comprehensive demonstrations.
+6. Learn how to build a serverless application using AWS services like API Gateway, Lambda, DynamoDB, and SQS
+7. Explore Amazon DevOps Guru's capabilities to detect operational issues
+8. Discover how to integrate Amazon DevOps Guru with PagerDuty
+9. Engage in an interactive discussion panel with expert presenters.
 
 **Key Takeaways:**
 
-- Gain a thorough understanding of serverless architectures across GCP, AWS, and Azure.
-- Explore practical implementations of serverless solutions to address real-world business problems.
-- Deepen your knowledge of platform-specific serverless offerings and best practices.
-- Engage in a vibrant discussion with industry experts, leveraging their insights and experiences to enrich your serverless journey.
+- Gain a thorough understanding of serverless architectures.
+- Explore practical implementations across GCP, AWS, and Azure.
+- Deepen your knowledge of platform-specific offerings and best practices
+- Explore how DevOps Guru’s Proactive Insights help identify configuration anti-patterns and optimize AWS resource management.
+- Deepen your knowledge of incident management by integrating DevOps Guru with PagerDuty for improved response and handling.
+- Engage with industry experts to enrich your serverless journey.
 
 **Don't Miss Out:**
 
 Expand your expertise and stay ahead in serverless innovation by joining us for a day of learning, exploration, and collaboration in advanced serverless computing.
 
-| TBA                                                          | Martin Dowden                                                | Chad Green                                                   |
+| Vadym Kazulkin                                               | Martin Dowden                                                | Chad Green                                                   |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| <a href="README.md"><img src="tba.jpg" alt="TBA" style="width:200px;" /></a> | <a href="martine-dowden.md"><img src="martine-dowden.png" alt="Martine Dowden" style="width:200px;" /></a> | <a href="chad-green.md"><img src="chad-green.jpg" alt="Chad Green" style="width:200px;" /></a> |
+| <a href="vadym-kazulkin.md"><img src="vadym-kazulkin.jpg" alt="TBA" style="width:200px;" /></a> | <a href="martine-dowden.md"><img src="martine-dowden.png" alt="Martine Dowden" style="width:200px;" /></a> | <a href="chad-green.md"><img src="chad-green.jpg" alt="Chad Green" style="width:200px;" /></a> |
 
 ## Materials and Demos
 
@@ -35,7 +40,8 @@ Expand your expertise and stay ahead in serverless innovation by joining us for 
 
 [Serverless Architecture Conference - Berlin 2024]([Serverless Architecture Conference 2024 | Berlin or Online (serverless-architecture.io)](https://serverless-architecture.io/berlin/))  
 Berlin, Germany  
-October 21-23, 2022 
+October 21, 2024
+09:00 to 17:00
 
 ## Other Presentations
 - [Berlin 2022](..\Berlin-2022\README.md) 
