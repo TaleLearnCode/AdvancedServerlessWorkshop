@@ -1,6 +1,7 @@
 # Martine Dowden
 <img style="float: left;" src="martine-dowden.png">
-**UX/UI Designer & Developer, GDE, MVP**  
+**UX/UI Designer & Developer, GDE, MVP**
+
 *Indianapolis, Indiana, United States*  
 
  

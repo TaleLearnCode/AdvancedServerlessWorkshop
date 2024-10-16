@@ -1,7 +1,8 @@
 # Martine Dowden
 <img style="float: left;" src="vadym-kazulkin.jpg">
 **Father of 3 | Head Of Development at ip.labs | Public Speaker | AWS Community Builder | @VKazulkin on Twitter | Blogger on dev.to/vkazulkin**
-*Cologne, Boon, Germany*  
+
+Cologne, Boon, Germany*  
 
  
 

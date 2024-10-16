@@ -34,7 +34,7 @@ Expand your expertise and stay ahead in serverless innovation by joining us for 
 
 ## Materials and Demos
 
-- Available Later
+- [[Slides] Serverless Unleashed: From Design Patterns to Azure Solutions and Beyond](EventMaterials/AdvancedServerlessWorkshop-Berlin2024-Azure.pdf)
 
 ## Time and Location
 
@@ -44,7 +44,6 @@ October 21, 2024
 09:00 to 17:00
 
 ## Other Presentations
-- [Berlin 2022](..\Berlin-2022\README.md) 
+- [London 2024](..\London-2024\README.md)
 - [London 2023](..\London-2023\README.md)
-- [London 2024](..\London-2024\README.md) 
-
+- [Berlin 2022](..\Berlin-2022\README.md)
